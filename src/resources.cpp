@@ -14,8 +14,8 @@ void fit_sprite_size(sf::Sprite& object, const sf::Vector2f exp_size) {
     }
 }
 
-//sf::Vector2f normalize_vector2f(sf::Vector2f vector) {
-//    if (vector.x == 0 && vector.y == 0) return vector;
+// sf::Vector2f normalize_vector2f(sf::Vector2f vector) {
+//     if (vector.x == 0 && vector.y == 0) return vector;
 
 //    float vector_length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
 //    vector = sf::Vector2f(vector.x / vector_length, vector.y / vector_length);

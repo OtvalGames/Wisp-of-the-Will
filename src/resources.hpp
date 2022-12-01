@@ -43,7 +43,7 @@ constexpr int frames_count = 9;
 
 // Resources processing
 void fit_sprite_size(sf::Sprite& object, const sf::Vector2f exp_size);
-//sf::Vector2f normalize_vector2f(sf::Vector2f vector);
+// sf::Vector2f normalize_vector2f(sf::Vector2f vector);
 sf::Vector2f tile_pos_to_coords(int pos_x, int pos_y, int tile_size);
 // void center_sprite_horizontally(sf::Sprite& object, const sf::Window& win);
 // void place_menu_button(sf::Sprite& _logo, sf::Sprite* upper_button, sf::Sprite* current_button);
