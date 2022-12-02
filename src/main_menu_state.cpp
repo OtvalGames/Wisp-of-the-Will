@@ -35,7 +35,8 @@ void main_menu_state::init() {
     // Stat button
     sf::Sprite* stat_button = buttons.at(buttons::stat);
     stat_button->setTexture(data->assets.get_texture("Stat Button"));
-    stat_button->setPosition(play_button->getPosition().x, play_button->getPosition().y + play_button->getGlobalBounds().height * 1.5);
+    stat_button->setPosition(play_button->getPosition().x,
+                             play_button->getPosition().y + play_button->getGlobalBounds().height * 1.5);
 
     // Exit button
     buttons.at(buttons::exit)->setTexture(data->assets.get_texture("Exit Button"));

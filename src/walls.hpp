@@ -1,10 +1,10 @@
 #ifndef WALLS_HPP
 #define WALLS_HPP
 
-#include "game.hpp"
-
 #include <SFML/Graphics.hpp>
 #include <vector>
+
+#include "game.hpp"
 
 namespace yapg {
 class walls {

@@ -2,9 +2,8 @@
 #define GAME_STATE_HPP
 
 #include "game.hpp"
-#include "walls.hpp"
-
 #include "state.hpp"
+#include "walls.hpp"
 
 namespace yapg {
 class game_state : public state {
@@ -12,7 +11,7 @@ class game_state : public state {
     game_data_ptr data;
     sf::Clock clock;
 
-    walls *_walls;
+    walls* _walls;
 
    public:
     game_state(game_data_ptr _data);

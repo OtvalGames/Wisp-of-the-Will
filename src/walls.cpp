@@ -15,8 +15,10 @@ walls::walls(game_data_ptr _data) {
     sprites.push_back(sprite);
     sprites.push_back(sprite);
 
-    sprites.at(0).setPosition(0 - sprites.at(0).getGlobalBounds().width / 2, 0 - sprites.at(0).getGlobalBounds().height / 2);
-    sprites.at(1).setPosition(0 + sprites.at(0).getGlobalBounds().width / 2, 0 - sprites.at(1).getGlobalBounds().height / 2);
+    sprites.at(0).setPosition(0 - sprites.at(0).getGlobalBounds().width / 2,
+                              0 - sprites.at(0).getGlobalBounds().height / 2);
+    sprites.at(1).setPosition(0 + sprites.at(0).getGlobalBounds().width / 2,
+                              0 - sprites.at(1).getGlobalBounds().height / 2);
 
     move_speed = -200;
 }
