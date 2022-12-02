@@ -1,6 +1,7 @@
 #include "splash_state.hpp"
 
 //#include "main_menu_state.hpp"
+#include "game_state.hpp"
 #include "resources.hpp"
 
 namespace bruh {
@@ -24,8 +25,8 @@ void splash_state::handle_input() {
     while (data->window.pollEvent(e)) {
         if (e.type == sf::Event::Closed) data->window.close();
         if (kb::isKeyPressed(kb::Enter) || kb::isKeyPressed(kb::Escape) || kb::isKeyPressed(kb::Space))
-            //            data->machine.replace_state(state_ptr(new main_menu_state(data)));
-            data->window.close();
+            data->machine.replace_state(state_ptr(new game_state(data)));
+        // data->window.close();
     }
 }
 
