@@ -29,6 +29,7 @@
 
 // Game state
 #define GAME_LVL_FILEPATH "res/levels/level_game.txt"
+#define WALLS_FILEPATH "res/images/walls.png"
 
 // Properties
 constexpr int player_sprite_size = 16;
