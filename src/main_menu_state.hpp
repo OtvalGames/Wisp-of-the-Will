@@ -5,12 +5,12 @@
 #include "state.hpp"
 
 namespace yapg {
-constexpr int buttons_count = 3;
-
-enum buttons { play = 0, stat, exit };
+constexpr int menu_buttons_count = 3;
 
 class main_menu_state : public state {
    private:
+    enum buttons { play = 0, stat, exit };
+
     game_data_ptr data;
     sf::Clock clock;
 

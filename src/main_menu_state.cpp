@@ -19,7 +19,7 @@ void main_menu_state::init() {
     data->assets.load_texture("Stat Button", STAT_BUTTON_FILEPATH);
     data->assets.load_texture("Exit Button", EXIT_BUTTON_FILEPATH);
 
-    for (int i = 0; i < buttons_count; i++) {
+    for (int i = 0; i < menu_buttons_count; i++) {
         buttons.push_back(new sf::Sprite);
     }
 
