@@ -1,7 +1,6 @@
 #include "splash_state.hpp"
 
-//#include "main_menu_state.hpp"
-#include "game_state.hpp"
+#include "main_menu_state.hpp"
 #include "resources.hpp"
 
 namespace yapg {
@@ -25,7 +24,7 @@ void splash_state::handle_input() {
     while (data->window.pollEvent(e)) {
         if (e.type == sf::Event::Closed) data->window.close();
         if (kb::isKeyPressed(kb::Enter) || kb::isKeyPressed(kb::Escape) || kb::isKeyPressed(kb::Space))
-            data->machine.replace_state(state_ptr(new game_state(data)));
+            data->machine.replace_state(state_ptr(new main_menu_state(data)));
         // data->window.close();
     }
 }
@@ -34,7 +33,7 @@ void splash_state::update(float dt) {
     float time_elapsed = clock.getElapsedTime().asSeconds();
 
     if (time_elapsed > splash_show_time)
-               data->machine.replace_state(state_ptr(new game_state(data)));
+               data->machine.replace_state(state_ptr(new main_menu_state(data)));
         // data->window.close();
 
     if (time_elapsed < splash_fade_time) {
