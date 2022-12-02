@@ -11,7 +11,7 @@ void main_menu_state::init() {
     data->assets.load_texture("Menu Background", MENU_BG_FILEPATH);
     bg.setTexture(data->assets.get_texture("Menu Background"));
 
-    bg.setPosition(-0.5 * data->window.getView().getSize().x, -0.5 * data->window.getView().getSize().y);
+    bg.setPosition(0, 0);
     fit_sprite_size(bg, sf::Vector2f(data->window.getSize()));
 
     // Buttons
