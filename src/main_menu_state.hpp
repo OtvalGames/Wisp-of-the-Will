@@ -5,7 +5,9 @@
 #include "state.hpp"
 
 namespace yapg {
-enum buttons { play = 0, exit };
+constexpr int buttons_count = 3;
+
+enum buttons { play = 0, stat, exit };
 
 class main_menu_state : public state {
    private:

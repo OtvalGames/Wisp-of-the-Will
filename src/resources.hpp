@@ -18,6 +18,7 @@
 // Buttons
 #define GO_BUTTON_FILEPATH "res/images/button_go.png"
 #define PLAY_BUTTON_FILEPATH "res/images/button_play.png"
+#define STAT_BUTTON_FILEPATH "res/images/button_stat.png"
 #define EXIT_BUTTON_FILEPATH "res/images/button_exit.png"
 
 // Splash state
