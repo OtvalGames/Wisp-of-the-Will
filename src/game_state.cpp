@@ -25,6 +25,10 @@ void game_state::handle_input() {
         if (e.type == sf::Event::Closed) {
             data->window.close();
         }
+
+        if (e.type == sf::Event::KeyPressed) {
+            data->window.close();
+        }
     }
 }
 
