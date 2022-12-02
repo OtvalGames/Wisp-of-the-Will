@@ -12,15 +12,20 @@
 //#define FONT_IMPACT "res/font_impact.ttf"
 //#define FONT_ALEGREYA "res/font_alegreya.ttf"
 
+// Menu
+#define MENU_BG_FILEPATH "res/images/menu_bg.png"
+
 // Buttons
 #define GO_BUTTON_FILEPATH "res/images/button_go.png"
+#define PLAY_BUTTON_FILEPATH "res/images/button_play.png"
+#define STAT_BUTTON_FILEPATH "res/images/button_stat.png"
 #define EXIT_BUTTON_FILEPATH "res/images/button_exit.png"
 
 // Splash state
 #define SPLASH_BG_FILEPATH LOGO_FILEPATH
 
 // Pause state
-#define PAUSE_BG_FILEPATH "res/images/menu_bg.png"
+#define PAUSE_BG_FILEPATH MENU_BG_FILEPATH
 
 // Main menu state
 //#define MAIN_MENU_LVL_FILEPATH "res/levels/level_main_menu.txt"
