@@ -44,6 +44,7 @@ constexpr int frames_count = 9;
 
 // Resources processing
 void fit_sprite_size(sf::Sprite& object, const sf::Vector2f exp_size);
+bool is_clicked(sf::Sprite _object, sf::Mouse::Button _button, sf::RenderWindow& window);
 // sf::Vector2f normalize_vector2f(sf::Vector2f vector);
 sf::Vector2f tile_pos_to_coords(int pos_x, int pos_y, int tile_size);
 // void center_sprite_horizontally(sf::Sprite& object, const sf::Window& win);
