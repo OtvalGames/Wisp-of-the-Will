@@ -2,7 +2,7 @@
 
 #include "resources.hpp"
 
-namespace bruh {
+namespace yapg {
 game_state::game_state(game_data_ptr _data) : data(_data) {}
 
 void game_state::init() {

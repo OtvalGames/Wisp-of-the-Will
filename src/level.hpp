@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-namespace bruh {
+namespace yapg {
 class level {
    public:
     level();
@@ -32,6 +32,6 @@ class level {
 
     unsigned int level_width, level_height, tile_width, tile_height;
 };
-}  // namespace bruh
+}  // namespace yapg
 
 #endif

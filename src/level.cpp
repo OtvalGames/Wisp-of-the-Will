@@ -2,7 +2,7 @@
 
 #include <fstream>
 
-namespace bruh {
+namespace yapg {
 level::level() {
     tile_width = 64;
     tile_height = 64;
@@ -82,4 +82,4 @@ void level::draw(sf::RenderWindow& window) {
 sf::Vector2u level::get_level_size() { return sf::Vector2u(level_width, level_height); }
 
 sf::Vector2u level::get_tile_size() { return sf::Vector2u(tile_width, tile_height); }
-}  // namespace bruh
+}  // namespace yapg

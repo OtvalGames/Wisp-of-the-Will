@@ -5,7 +5,7 @@
 #include "level.hpp"
 #include "state.hpp"
 
-namespace bruh {
+namespace yapg {
 class game_state : public state {
    private:
     game_data_ptr data;
@@ -22,6 +22,6 @@ class game_state : public state {
     void update(float dt);
     void draw(float dt);
 };
-}  // namespace bruh
+}  // namespace yapg
 
 #endif  // GAME_STATE_HPP
