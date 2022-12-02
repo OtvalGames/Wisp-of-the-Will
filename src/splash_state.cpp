@@ -34,8 +34,8 @@ void splash_state::update(float dt) {
     float time_elapsed = clock.getElapsedTime().asSeconds();
 
     if (time_elapsed > splash_show_time)
-        //        data->machine.replace_state(state_ptr(new main_menu_state(data)));
-        data->window.close();
+               data->machine.replace_state(state_ptr(new game_state(data)));
+        // data->window.close();
 
     if (time_elapsed < splash_fade_time) {
         int dim_lvl = static_cast<int>(time_elapsed * 255 / splash_fade_time) % 255;
