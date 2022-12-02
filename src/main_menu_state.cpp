@@ -7,6 +7,8 @@ namespace yapg {
 main_menu_state::main_menu_state(game_data_ptr _data) : data(_data) {}
 
 void main_menu_state::init() {
+    data->window.setView(data->window.getDefaultView());
+
     // BG
     data->assets.load_texture("Menu Background", MENU_BG_FILEPATH);
     bg.setTexture(data->assets.get_texture("Menu Background"));
