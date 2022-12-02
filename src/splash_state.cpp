@@ -4,7 +4,7 @@
 #include "game_state.hpp"
 #include "resources.hpp"
 
-namespace bruh {
+namespace yapg {
 splash_state::splash_state(game_data_ptr _data) : data(_data) {}
 
 void splash_state::init() {
@@ -54,4 +54,4 @@ void splash_state::draw(float dt) {
 
     data->window.display();
 }
-}  // namespace bruh
+}  // namespace yapg

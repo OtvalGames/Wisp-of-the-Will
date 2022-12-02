@@ -3,13 +3,13 @@
 
 #include <SFML/Graphics.hpp>
 
-namespace bruh {
+namespace yapg {
 class input_manager {
    public:
     sf::Vector2i get_mouse_pos(sf::RenderWindow& window);
 
     bool is_clicked(sf::Sprite _object, sf::Mouse::Button _button, sf::RenderWindow& window);
 };
-}  // namespace bruh
+}  // namespace yapg
 
 #endif

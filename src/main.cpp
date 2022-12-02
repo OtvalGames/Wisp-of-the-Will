@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 int main() {
-    bruh::game();
+    yapg::game();
 
     return 0;
 }
