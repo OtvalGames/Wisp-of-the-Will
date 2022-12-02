@@ -14,6 +14,19 @@ void fit_sprite_size(sf::Sprite& object, const sf::Vector2f exp_size) {
     }
 }
 
+bool is_clicked(sf::Sprite _object, sf::Mouse::Button _button, sf::RenderWindow& window) {
+    if (sf::Mouse::isButtonPressed(_button)) {
+        sf::IntRect tmp(_object.getPosition().x, _object.getPosition().y,
+                        _object.getGlobalBounds().width, _object.getGlobalBounds().height);
+
+        sf::Vector2i mouse_pos = sf::Vector2i(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+        if (tmp.contains(mouse_pos)) return true;
+    }
+
+    return false;
+}
+
 // sf::Vector2f normalize_vector2f(sf::Vector2f vector) {
 //     if (vector.x == 0 && vector.y == 0) return vector;
 

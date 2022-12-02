@@ -12,8 +12,15 @@
 //#define FONT_IMPACT "res/font_impact.ttf"
 //#define FONT_ALEGREYA "res/font_alegreya.ttf"
 
+// Buttons
+#define GO_BUTTON_FILEPATH "res/images/button_go.png"
+#define EXIT_BUTTON_FILEPATH "res/images/button_exit.png"
+
 // Splash state
 #define SPLASH_BG_FILEPATH LOGO_FILEPATH
+
+// Pause state
+#define PAUSE_BG_FILEPATH "res/images/menu_bg.png"
 
 // Main menu state
 //#define MAIN_MENU_LVL_FILEPATH "res/levels/level_main_menu.txt"
@@ -44,6 +51,7 @@ constexpr int frames_count = 9;
 
 // Resources processing
 void fit_sprite_size(sf::Sprite& object, const sf::Vector2f exp_size);
+bool is_clicked(sf::Sprite _object, sf::Mouse::Button _button, sf::RenderWindow& window);
 // sf::Vector2f normalize_vector2f(sf::Vector2f vector);
 sf::Vector2f tile_pos_to_coords(int pos_x, int pos_y, int tile_size);
 // void center_sprite_horizontally(sf::Sprite& object, const sf::Window& win);

@@ -1,5 +1,6 @@
 #include "game_state.hpp"
 
+#include "pause_state.hpp"
 #include "resources.hpp"
 
 namespace yapg {
@@ -26,7 +27,8 @@ void game_state::handle_input() {
         }
 
         if (e.type == sf::Event::KeyPressed) {
-            if (e.key.code == sf::Keyboard::Escape) data->window.close();
+            if (e.key.code == sf::Keyboard::Escape)
+                data->machine.add_state(state_ptr(new pause_state(data)));
         }
     }
 }

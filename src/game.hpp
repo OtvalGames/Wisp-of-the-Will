@@ -11,7 +11,6 @@ struct game_data {
     sf::RenderWindow window;
     state_machine machine;
     asset_manager assets;
-    //    input_manager input;
 };
 
 typedef std::shared_ptr<game_data> game_data_ptr;
