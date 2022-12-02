@@ -19,7 +19,9 @@ bool is_clicked(sf::Sprite _object, sf::Mouse::Button _button, sf::RenderWindow&
         sf::IntRect tmp(_object.getPosition().x, _object.getPosition().y,
                         _object.getGlobalBounds().width, _object.getGlobalBounds().height);
 
-        if (tmp.contains(sf::Mouse::getPosition(window))) return true;
+        sf::Vector2i mouse_pos = sf::Vector2i(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+
+        if (tmp.contains(mouse_pos)) return true;
     }
 
     return false;
