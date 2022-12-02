@@ -7,6 +7,7 @@
 namespace yapg {
 constexpr float splash_fade_time = 0.7;
 
+constexpr int buttons_count = 2;
 enum buttons { go = 0, exit };
 
 class pause_state : public state {

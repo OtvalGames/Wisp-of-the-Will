@@ -22,7 +22,7 @@ void pause_state::init() {
     data->assets.load_texture("Go Button", GO_BUTTON_FILEPATH);
     data->assets.load_texture("Exit Button", EXIT_BUTTON_FILEPATH);
 
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < buttons_count; i++) {
         buttons.push_back(new sf::Sprite);
     }
 
