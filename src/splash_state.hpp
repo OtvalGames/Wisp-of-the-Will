@@ -4,7 +4,7 @@
 #include "game.hpp"
 #include "state.hpp"
 
-namespace bruh {
+namespace yapg {
 constexpr float splash_fade_time = 1.0;
 constexpr float splash_show_time = 3.5;
 
@@ -24,6 +24,6 @@ class splash_state : public state {
     void update(float dt);
     void draw(float dt);
 };
-}  // namespace bruh
+}  // namespace yapg
 
 #endif  // SPLASH_STATE_HPP

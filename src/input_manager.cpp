@@ -1,6 +1,6 @@
 #include "input_manager.hpp"
 
-namespace bruh {
+namespace yapg {
 sf::Vector2i input_manager::get_mouse_pos(sf::RenderWindow& window) {
     return sf::Mouse::getPosition(window);
 }
@@ -15,4 +15,4 @@ bool input_manager::is_clicked(sf::Sprite _object, sf::Mouse::Button _button, sf
 
     return false;
 }
-}  // namespace bruh
+}  // namespace yapg

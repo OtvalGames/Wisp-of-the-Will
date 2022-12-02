@@ -6,7 +6,7 @@
 
 #include "state.hpp"
 
-namespace bruh {
+namespace yapg {
 typedef std::unique_ptr<state> state_ptr;
 
 class state_machine {
@@ -28,6 +28,6 @@ class state_machine {
     bool is_replacing;
     bool is_removing;
 };
-}  // namespace bruh
+}  // namespace yapg
 
 #endif

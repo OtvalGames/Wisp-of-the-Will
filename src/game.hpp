@@ -6,7 +6,7 @@
 #include "asset_manager.hpp"
 #include "state_machine.hpp"
 
-namespace bruh {
+namespace yapg {
 struct game_data {
     sf::RenderWindow window;
     state_machine machine;
@@ -28,6 +28,6 @@ class game {
 
     game_data_ptr data = std::make_shared<game_data>();
 };
-}  // namespace bruh
+}  // namespace yapg
 
 #endif
