@@ -1,6 +1,6 @@
 #include "pause_state.hpp"
 
-//#include "main_menu_state.hpp"
+#include "main_menu_state.hpp"
 #include "resources.hpp"
 
 namespace yapg {
@@ -22,7 +22,7 @@ void pause_state::init() {
     data->assets.load_texture("Go Button", GO_BUTTON_FILEPATH);
     data->assets.load_texture("Exit Button", EXIT_BUTTON_FILEPATH);
 
-    for (int i = 0; i < buttons_count; i++) {
+    for (int i = 0; i < pause_buttons_count; i++) {
         buttons.push_back(new sf::Sprite);
     }
 
@@ -51,8 +51,7 @@ void pause_state::handle_input() {
             data->machine.remove_state();
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked
-            data->window.close();
-            // data->machine.replace_state(state_ptr(new main_menu_state(data)));
+            data->machine.replace_state(state_ptr(new main_menu_state(data)));
         }
     }
 }

@@ -6,12 +6,12 @@
 
 namespace yapg {
 constexpr float splash_fade_time = 0.7;
-
-constexpr int buttons_count = 2;
-enum buttons { go = 0, exit };
+constexpr int pause_buttons_count = 2;
 
 class pause_state : public state {
    private:
+    enum buttons { go = 0, exit };
+
     game_data_ptr data;
     sf::Clock clock;
 
