@@ -27,7 +27,7 @@ void game_state::handle_input() {
         }
 
         if (e.type == sf::Event::KeyPressed) {
-            data->window.close();
+            if (e.key.code == sf::Keyboard::Escape) data->window.close();
         }
     }
 }
