@@ -1,9 +1,9 @@
 #ifndef OBSTACLE_HPP
 #define OBSTACLE_HPP
 
-#include "game.hpp"
-
 #include <SFML/Graphics.hpp>
+
+#include "game.hpp"
 
 namespace yapg {
 class obstacle {
@@ -17,6 +17,11 @@ class obstacle {
     void set_position(sf::Vector2f _position);
     void set_position(float x, float y);
     sf::Vector2f get_position();
+
+    sf::FloatRect get_global_bounds();
+
+    void set_texture(sf::Texture _texture);
+    void set_texture_rect(sf::IntRect _rect);
 
     void activate();
     void disable();
