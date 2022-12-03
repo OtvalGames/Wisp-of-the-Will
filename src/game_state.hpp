@@ -36,6 +36,9 @@ class game_state : public state {
     unsigned int score_increase;
     unsigned int max_score;
 
+    sf::Text score_text;
+    sf::Font score_font;
+
    private:
     void obstacles_update(float dt);
     void objects_spawn();

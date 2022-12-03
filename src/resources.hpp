@@ -10,7 +10,7 @@
 //#define EXP_FRAME "res/images/exp_bar_frame.png"
 //#define EXP_LINE "res/images/exp_bar_line.png"
 //#define CRYSTAL_FILEPATH "res/images/crystal1.png"
-//#define FONT_IMPACT "res/font_impact.ttf"
+#define FONT_IMPACT "res/font_impact.ttf"
 //#define FONT_ALEGREYA "res/font_alegreya.ttf"
 
 // Menu

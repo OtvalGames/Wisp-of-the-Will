@@ -1,9 +1,9 @@
 #include "game_state.hpp"
 
+#include <fstream>
+
 #include "pause_state.hpp"
 #include "resources.hpp"
-
-#include <fstream>
 
 namespace yapg {
 game_state::game_state(game_data_ptr _data) : data(_data) {}
@@ -59,6 +59,13 @@ void game_state::init() {
         file >> max_score;
         file.close();
     }
+
+    score_font.loadFromFile(FONT_IMPACT);
+
+    score_text.setFont(score_font);
+    score_text.setCharacterSize(35);
+    score_text.setPosition(data->window.getView().getCenter() - data->window.getView().getSize() / 2.0f + sf::Vector2f(10, 10));
+    score_text.setString("Score: 0");
 }
 
 void game_state::handle_input() {
@@ -191,6 +198,7 @@ void game_state::obstacles_update(float dt) {
                 data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
                 _obstacles.at(i).disable();
                 score += score_increase;
+                score_text.setString("Score: " + std::to_string(score));
             }
         }
     }
@@ -209,6 +217,8 @@ void game_state::draw(float dt) {
 
     for (int i = 0; i < _obstacles.size(); i++)
         if (_obstacles.at(i).active()) _obstacles.at(i).draw();
+
+    data->window.draw(score_text);
 
     data->window.display();
 }
