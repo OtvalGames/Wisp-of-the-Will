@@ -12,14 +12,14 @@ void player_::init(game_data_ptr _data) {
     sf::Image player_animations_image;
     player_animations_image.loadFromFile(PLAYER_ANIMATIONS_FILEPATH);
 
-    constexpr int i = 3;
+    constexpr int sprite_line = 3;
 
-    for (int j = 0; j < player_sprite_size * frames_count; j += player_sprite_size) {
-        sf::Texture tmp;
-        tmp.loadFromImage(player_animations_image, sf::IntRect(j, i * player_sprite_size,
+    for (int i = 0; i < player_sprite_size * frames_count; i += player_sprite_size) {
+        sf::Texture texture;
+        texture.loadFromImage(player_animations_image, sf::IntRect(i, sprite_line * player_sprite_size,
                                                                player_sprite_size, player_sprite_size));
 
-        animations.push_back(tmp);
+        animations.push_back(texture);
     }
 
     animation_iterator = 0;
@@ -52,10 +52,6 @@ void player_::draw() {
 }
 
 void player_::handle_input(sf::Event event) {}
-
-void player_::set_speed(unsigned int _speed) { vspeed = _speed; }
-
-unsigned int player_::get_speed() { return vspeed; }
 
 void player_::set_position(sf::Vector2f point) { sprite.setPosition(point); }
 
