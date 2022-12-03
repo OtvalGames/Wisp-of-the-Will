@@ -65,12 +65,15 @@ void game_state::handle_input() {
 
     while (data->window.pollEvent(e)) {
         if (e.type == sf::Event::Closed) {
+            max_score_save();
             data->window.close();
         }
 
         if (e.type == sf::Event::KeyPressed) {
-            if (e.key.code == sf::Keyboard::Escape)
+            if (e.key.code == sf::Keyboard::Escape) {
+                max_score_save();
                 data->machine.add_state(state_ptr(new pause_state(data)));
+            }
         }
     }
 }
@@ -151,7 +154,7 @@ void game_state::objects_spawn() {
 }
 
 void game_state::max_score_save() {
-    write_score_to_save(score);
+    if (score > max_score) write_score_to_save(score);
 }
 
 void game_state::obstacles_update(float dt) {
