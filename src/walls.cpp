@@ -20,7 +20,7 @@ walls::walls(game_data_ptr _data) {
     sprites.at(1).setPosition(0 + sprites.at(0).getGlobalBounds().width / 2,
                               0 - sprites.at(1).getGlobalBounds().height / 2);
 
-    move_speed = -200;
+    move_speed = -200.0f;
 }
 
 void walls::move(float dt) {
@@ -40,4 +40,9 @@ void walls::draw() {
         data->window.draw(sprites.at(i));
     }
 }
+
+void walls::set_move_speed(float _speed) { move_speed = _speed; }
+
+int walls::get_move_speed() { return move_speed; }
+
 }  // namespace yapg
