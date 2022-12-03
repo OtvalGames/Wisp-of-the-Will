@@ -35,7 +35,7 @@ class player_ {
     sf::Clock clock;
 
     sf::Sprite sprite;
-    std::vector<sf::Texture>* animations;
+    std::deque<sf::Texture> animations;
     unsigned int animation_iterator;
 
     unsigned int direction;

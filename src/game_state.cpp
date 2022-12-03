@@ -208,6 +208,8 @@ void game_state::draw(float dt) {
     for (int i = 0; i < _obstacles.size(); i++)
         if (_obstacles.at(i).active()) _obstacles.at(i).draw();
 
+    player.draw();
+
     data->window.draw(score_text);
 
     data->window.display();

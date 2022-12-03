@@ -12,7 +12,7 @@ class game_state : public state {
    private:
     game_data_ptr data;
     sf::Clock clock;
-    player
+    player_ player;
 
     walls* _walls;
 
