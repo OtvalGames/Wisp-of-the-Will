@@ -9,17 +9,11 @@ class player_ {
     player_(game_data_ptr _data);
 
     void init(game_data_ptr _data);
+    void draw();
+    void handle_input(sf::Event event);
+    void update(float dt);
 
     void animate();
-    void draw();
-
-    void handle_input(sf::Event event);
-
-    void update(float dt);
-    void movement(float dt);
-
-    void set_speed(unsigned int _speed);
-    unsigned int get_speed();
 
     void set_position(sf::Vector2f point);
     sf::Vector2f get_position();
@@ -33,8 +27,6 @@ class player_ {
     sf::Sprite sprite;
     std::deque<sf::Texture> animations;
     unsigned int animation_iterator;
-
-    unsigned int vspeed;
 };
 }  // namespace yapg
 

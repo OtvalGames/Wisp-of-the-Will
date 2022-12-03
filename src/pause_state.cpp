@@ -14,7 +14,7 @@ void pause_state::init() {
     data->assets.load_texture("Pause Background", PAUSE_BG_FILEPATH);
     bg.setTexture(data->assets.get_texture("Pause Background"));
 
-    bg.setPosition(-0.5 * data->window.getView().getSize().x, -0.5 * data->window.getView().getSize().y);
+    bg.setPosition(data->window.mapPixelToCoords(sf::Vector2i(0, 0)));
     fit_sprite_size(bg, sf::Vector2f(data->window.getSize()));
 
     // Dim
@@ -39,8 +39,9 @@ void pause_state::init() {
     // Exit button
     buttons.at(buttons::exit)->setTexture(data->assets.get_texture("Exit Button"));
     buttons.at(buttons::exit)
-        ->setPosition(go_button->getPosition().x,
-                      go_button->getPosition().y + go_button->getGlobalBounds().height * 1.5);
+        ->setPosition(
+            go_button->getPosition().x,
+            go_button->getPosition().y + go_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     is_exit = false;
 }
@@ -107,7 +108,9 @@ void pause_state::draw(float dt) {
     data->window.clear();
 
     data->window.draw(bg);
+
     for (const sf::Sprite* b : buttons) data->window.draw(*b);
+
     data->window.draw(dim);
 
     data->window.display();

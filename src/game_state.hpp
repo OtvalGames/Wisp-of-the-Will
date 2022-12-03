@@ -5,8 +5,8 @@
 #include "obstacle.hpp"
 #include "player.hpp"
 #include "state.hpp"
-#include "walls.hpp"
 #include "timer.hpp"
+#include "walls.hpp"
 
 namespace yapg {
 class game_state : public state {

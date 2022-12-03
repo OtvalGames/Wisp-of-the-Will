@@ -21,7 +21,6 @@ game::game() {
     data->window.setMouseCursor(cursor);
 
     data->machine.add_state(state_ptr(new splash_state(data)));
-
     run();
 }
 

@@ -26,8 +26,8 @@ void state_machine::state_change_process() {
         while (!states.empty()) states.pop();
 
         is_clear = false;
-    } 
-    
+    }
+
     if (is_adding) {
         states.push(std::move(new_state));
         states.top()->init();
