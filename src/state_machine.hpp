@@ -15,6 +15,8 @@ class state_machine {
     void replace_state(state_ptr _state);
     void remove_state();
 
+    void clear_states();
+
     void state_change_process();
 
     state_ptr& get_active_state();
@@ -27,6 +29,7 @@ class state_machine {
     bool is_adding;
     bool is_replacing;
     bool is_removing;
+    bool is_clear;
 };
 }  // namespace yapg
 

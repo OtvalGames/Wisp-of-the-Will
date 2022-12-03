@@ -15,12 +15,20 @@ void state_machine::replace_state(state_ptr _state) {
 
 void state_machine::remove_state() { is_removing = true; }
 
+void state_machine::clear_states() { is_clear = true; }
+
 void state_machine::state_change_process() {
     if (is_removing) {
         if (!states.empty()) states.pop();
 
         is_removing = false;
-    } else if (is_adding) {
+    } else if (is_clear) {
+        while (!states.empty()) states.pop();
+
+        is_clear = false;
+    } 
+    
+    if (is_adding) {
         states.push(std::move(new_state));
         states.top()->init();
 
