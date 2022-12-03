@@ -46,6 +46,12 @@ void pause_state::handle_input() {
     while (data->window.pollEvent(e)) {
         if (e.type == sf::Event::Closed) data->window.close();
 
+        if (e.type == sf::Event::KeyPressed)
+            if (e.key.code == sf::Keyboard::Escape) {
+                data->machine.remove_state();
+                break;
+            }
+
         if (is_clicked(*buttons.at(buttons::go), sf::Mouse::Left, data->window)) {
             // Go button clicked
             data->machine.remove_state();
