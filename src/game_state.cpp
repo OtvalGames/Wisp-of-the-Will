@@ -30,7 +30,7 @@ void game_state::init() {
     data->window.setView(view);
 
     lines[0].x = data->window.getView().getCenter().x + data->window.getView().getSize().x / 2.0f;
-    lines[0].y = data->window.getView().getCenter().y - 32 + 64;
+    lines[0].y = data->window.getView().getCenter().y - 32 - 64;
     lines[1].x = data->window.getView().getCenter().x + data->window.getView().getSize().x / 2.0f;
     lines[1].y = data->window.getView().getCenter().y - 32;
     lines[2].x = data->window.getView().getCenter().x + data->window.getView().getSize().x / 2.0f;
@@ -102,33 +102,36 @@ void game_state::objects_spawn() {
         set_rand_obstacle_texture(tmp);
     } else if (chance > 45 && chance <= 60) {
         obstacle& tmp1 = get_free_obstacle(_obstacles);
-        obstacle& tmp2 = get_free_obstacle(_obstacles);
 
         tmp1.activate();
         tmp1.set_position(lines[0]);
         set_rand_obstacle_texture(tmp1);
+
+        obstacle& tmp2 = get_free_obstacle(_obstacles);
 
         tmp2.activate();
         tmp2.set_position(lines[1]);
         set_rand_obstacle_texture(tmp2);
     } else if (chance > 60 && chance <= 75) {
         obstacle& tmp1 = get_free_obstacle(_obstacles);
-        obstacle& tmp2 = get_free_obstacle(_obstacles);
 
         tmp1.activate();
         tmp1.set_position(lines[1]);
         set_rand_obstacle_texture(tmp1);
+
+        obstacle& tmp2 = get_free_obstacle(_obstacles);
 
         tmp2.activate();
         tmp2.set_position(lines[2]);
         set_rand_obstacle_texture(tmp2);
     } else if (chance > 75 && chance <= 90) {
         obstacle& tmp1 = get_free_obstacle(_obstacles);
-        obstacle& tmp2 = get_free_obstacle(_obstacles);
 
         tmp1.activate();
         tmp1.set_position(lines[0]);
         set_rand_obstacle_texture(tmp1);
+
+        obstacle& tmp2 = get_free_obstacle(_obstacles);
 
         tmp2.activate();
         tmp2.set_position(lines[2]);
