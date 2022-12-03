@@ -5,8 +5,8 @@
 #include "game_state.hpp"
 
 namespace yapg {
-game_over_state::game_over_state(game_data_ptr _data, timer& _game_timer)
-    : data(_data), game_timer(_game_timer) { }
+game_over_state::game_over_state(game_data_ptr _data, unsigned int _game_score, timer _game_timer)
+    : data(_data), game_score(_game_score) , game_timer(_game_timer) { }
 
 void game_over_state::init() {
     // BG
@@ -40,6 +40,19 @@ void game_over_state::init() {
     buttons.at(buttons::exit)
         ->setPosition(again_button->getPosition().x,
                       again_button->getPosition().y + again_button->getGlobalBounds().height * 1.5);
+
+    // Score
+    score_font.loadFromFile(FONT_IMPACT);
+
+    stats_text.setFont(score_font);
+    stats_text.setCharacterSize(35);
+
+    stats_text.setString("Your score: " + std::to_string(game_score));
+    stats_text.setString(stats_text.getString() + "\nTime played: " + std::to_string(static_cast<int>(game_timer.get_elapsed_seconds())) + "s");
+
+    stats_text.setPosition(
+        bg.getPosition().x + bg.getGlobalBounds().width / 2 - stats_text.getGlobalBounds().width / 2,
+        bg.getPosition().y + bg.getGlobalBounds().height / 3 - stats_text.getGlobalBounds().height);
 
     is_exit = false;
 }
@@ -107,7 +120,10 @@ void game_over_state::draw(float dt) {
     data->window.clear();
 
     data->window.draw(bg);
+
     for (const sf::Sprite* b : buttons) data->window.draw(*b);
+    data->window.draw(stats_text);
+
     data->window.draw(dim);
 
     data->window.display();

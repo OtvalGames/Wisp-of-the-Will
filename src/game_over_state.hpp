@@ -14,16 +14,21 @@ class game_over_state : public state {
 
     game_data_ptr data;
     sf::Clock clock;
-    timer& game_timer;
+
+    timer game_timer;
+    unsigned int game_score;
 
     sf::Sprite bg;
     sf::RectangleShape dim;
     std::deque<sf::Sprite*> buttons;
 
+    sf::Text stats_text;
+    sf::Font score_font;
+
     bool is_exit;
 
    public:
-    game_over_state(game_data_ptr _data, timer& _game_timer);
+    game_over_state(game_data_ptr _data, unsigned int _game_score, timer _game_timer);
 
     void init();
 

@@ -228,7 +228,7 @@ void game_state::update(float dt) {
     if (is_player_hit_obstacle(*this)) {
         // Player hit an obstacle and died
         max_score_save();
-        data->machine.replace_state(state_ptr(new game_over_state(data, clock)));
+        data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
     }
 }
 
