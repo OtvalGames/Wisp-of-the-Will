@@ -16,8 +16,8 @@ void game_state::init() {
 
     _walls = new walls(data);
 
-    player.set_position(sf::Vector2f(player.get_position().x - data->window.getSize().x / 4,
-                                     player.get_position().y));
+    player.set_position(
+        sf::Vector2f(player.get_position().x - data->window.getSize().x / 4, player.get_position().y));
 
     int obstacles_pool_count = 10;
 
@@ -62,7 +62,8 @@ void game_state::init() {
 
     score_text.setFont(score_font);
     score_text.setCharacterSize(35);
-    score_text.setPosition(data->window.getView().getCenter() - data->window.getView().getSize() / 2.0f + sf::Vector2f(10, 10));
+    score_text.setPosition(data->window.getView().getCenter() - data->window.getView().getSize() / 2.0f +
+                           sf::Vector2f(10, 10));
     score_text.setString("Score: 0");
 }
 
@@ -79,16 +80,12 @@ void game_state::handle_input() {
             if (e.key.code == sf::Keyboard::Escape) {
                 max_score_save();
                 data->machine.add_state(state_ptr(new pause_state(data)));
-            }
-            else if (e.key.code == sf::Keyboard::W) {
+            } else if (e.key.code == sf::Keyboard::W) {
                 // Move 1 line up
-                if (player.get_position().y >= 0)
-                    player.get_sprite().move(0, 0 - tile_size);
-            }
-            else if (e.key.code == sf::Keyboard::S) {
+                if (player.get_position().y >= 0) player.get_sprite().move(0, 0 - tile_size);
+            } else if (e.key.code == sf::Keyboard::S) {
                 // Move 1 line down
-                if (player.get_position().y <= 0)
-                    player.get_sprite().move(0, tile_size);
+                if (player.get_position().y <= 0) player.get_sprite().move(0, tile_size);
             }
         }
     }

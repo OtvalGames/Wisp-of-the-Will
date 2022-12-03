@@ -4,9 +4,7 @@
 
 namespace yapg {
 
-player_::player_(game_data_ptr _data) {
-    init(_data);
-}
+player_::player_(game_data_ptr _data) { init(_data); }
 
 void player_::init(game_data_ptr _data) {
     data = _data;
@@ -18,8 +16,8 @@ void player_::init(game_data_ptr _data) {
 
     for (int j = 0; j < player_sprite_size * frames_count; j += player_sprite_size) {
         sf::Texture tmp;
-        tmp.loadFromImage(player_animations_image,
-                          sf::IntRect(j, i * player_sprite_size, player_sprite_size, player_sprite_size));
+        tmp.loadFromImage(player_animations_image, sf::IntRect(j, i * player_sprite_size,
+                                                               player_sprite_size, player_sprite_size));
 
         animations.push_back(tmp);
     }
@@ -53,7 +51,7 @@ void player_::draw() {
     data->window.draw(sprite);
 }
 
-void player_::handle_input(sf::Event event) { }
+void player_::handle_input(sf::Event event) {}
 
 void player_::set_speed(unsigned int _speed) { vspeed = _speed; }
 

@@ -31,9 +31,10 @@ void walls::move(float dt) {
             data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
             int j = (i + 1) % 2;
 
-            sprites.at(i).setPosition(
-                sf::Vector2f(sprites.at(j).getGlobalBounds().left + sprites.at(j).getGlobalBounds().width + (move_speed * dt),
-                             sprites.at(i).getPosition().y));
+            sprites.at(i).setPosition(sf::Vector2f(sprites.at(j).getGlobalBounds().left +
+                                                       sprites.at(j).getGlobalBounds().width +
+                                                       (move_speed * dt),
+                                                   sprites.at(i).getPosition().y));
         }
     }
 }

@@ -3,9 +3,9 @@
 
 #include "game.hpp"
 #include "obstacle.hpp"
+#include "player.hpp"
 #include "state.hpp"
 #include "walls.hpp"
-#include "player.hpp"
 
 namespace yapg {
 class game_state : public state {
@@ -33,7 +33,7 @@ class game_state : public state {
     float last_object_speed_increase_time;
     float object_spawn_interval_decrease_interval;
     float last_object_spawn_interval_decrease_time;
-    
+
     unsigned int score;
     unsigned int score_increase;
     unsigned int max_score;
@@ -50,6 +50,7 @@ class game_state : public state {
     void max_score_save();
 
     friend bool is_player_hit_obstacle(game_state& gs);
+
    public:
     game_state(game_data_ptr _data);
 
