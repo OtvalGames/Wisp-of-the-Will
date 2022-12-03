@@ -1,6 +1,6 @@
 #include "game_state.hpp"
 
-#include "main_menu_state.hpp"
+#include "game_over_state.hpp"
 #include "pause_state.hpp"
 #include "resources.hpp"
 
@@ -228,7 +228,7 @@ void game_state::update(float dt) {
     if (is_player_hit_obstacle(*this)) {
         // Player hit an obstacle and died
         max_score_save();
-        data->machine.replace_state(state_ptr(new main_menu_state(data)));
+        data->machine.replace_state(state_ptr(new game_over_state(data, clock)));
     }
 }
 
