@@ -5,6 +5,8 @@
 #include "resources.hpp"
 
 namespace yapg {
+constexpr int tile_size = 64;
+
 game_state::game_state(game_data_ptr _data) : data(_data), player(_data) {}
 
 void game_state::init() {
@@ -32,11 +34,11 @@ void game_state::init() {
     data->window.setView(view);
 
     lines[0].x = data->window.getView().getCenter().x + data->window.getView().getSize().x / 2.0f;
-    lines[0].y = data->window.getView().getCenter().y - 32 - 64;
+    lines[0].y = data->window.getView().getCenter().y - tile_size / 2 - tile_size;
     lines[1].x = data->window.getView().getCenter().x + data->window.getView().getSize().x / 2.0f;
-    lines[1].y = data->window.getView().getCenter().y - 32;
+    lines[1].y = data->window.getView().getCenter().y - tile_size / 2;
     lines[2].x = data->window.getView().getCenter().x + data->window.getView().getSize().x / 2.0f;
-    lines[2].y = data->window.getView().getCenter().y + 32;
+    lines[2].y = data->window.getView().getCenter().y + tile_size / 2;
 
     object_spawn_interval = 2.5f;
     object_spawn_interval_decrease = 0.05f;
@@ -81,12 +83,12 @@ void game_state::handle_input() {
             else if (e.key.code == sf::Keyboard::W) {
                 // Move 1 line up
                 if (player.get_position().y >= 0)
-                    player.get_sprite().move(0, -64);
+                    player.get_sprite().move(0, 0 - tile_size);
             }
             else if (e.key.code == sf::Keyboard::S) {
                 // Move 1 line down
                 if (player.get_position().y <= 0)
-                    player.get_sprite().move(0, 64);
+                    player.get_sprite().move(0, tile_size);
             }
         }
     }
@@ -94,7 +96,7 @@ void game_state::handle_input() {
 
 void game_state::set_rand_obstacle_texture(obstacle& _obstacle) {
     _obstacle.set_texture(data->assets.get_texture("Obstacles"));
-    _obstacle.set_texture_rect(sf::IntRect((rand() % 4) * 64, 0, 64, 64));
+    _obstacle.set_texture_rect(sf::IntRect((rand() % 4) * tile_size, 0, tile_size, tile_size));
 }
 
 obstacle& game_state::get_free_obstacle(std::vector<obstacle>& arr) {
