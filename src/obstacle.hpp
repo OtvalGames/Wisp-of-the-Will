@@ -20,7 +20,7 @@ class obstacle {
 
     sf::FloatRect get_global_bounds();
 
-    void set_texture(sf::Texture _texture);
+    void set_texture(sf::Texture& _texture);
     void set_texture_rect(sf::IntRect _rect);
 
     void activate();

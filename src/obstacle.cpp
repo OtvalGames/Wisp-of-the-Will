@@ -15,7 +15,7 @@ sf::Vector2f obstacle::get_position() { return sprite.getPosition(); }
 
 sf::FloatRect obstacle::get_global_bounds() { return sprite.getGlobalBounds(); }
 
-void obstacle::set_texture(sf::Texture _texture) { sprite.setTexture(_texture); }
+void obstacle::set_texture(sf::Texture& _texture) { sprite.setTexture(_texture); }
 
 void obstacle::set_texture_rect(sf::IntRect _rect) { sprite.setTextureRect(_rect); }
 
