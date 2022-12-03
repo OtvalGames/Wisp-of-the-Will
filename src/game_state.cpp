@@ -1,5 +1,6 @@
 #include "game_state.hpp"
 
+#include "main_menu_state.hpp"
 #include "pause_state.hpp"
 #include "resources.hpp"
 
@@ -197,10 +198,28 @@ void game_state::obstacles_update(float dt) {
     }
 }
 
+bool is_player_hit_obstacle(game_state& gs) {
+    sf::Sprite player_sprite = gs.player.get_sprite();
+
+    for (obstacle& obstacle : gs._obstacles) {
+        if (!obstacle.active()) continue;
+
+        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
-    // if (player_death) if (score > max_score) save_max_score();
+    if (is_player_hit_obstacle(*this)) {
+        // Player hit an obstacle and died
+        max_score_save();
+        data->machine.replace_state(state_ptr(new main_menu_state(data)));
+    }
 }
 
 void game_state::draw(float dt) {
