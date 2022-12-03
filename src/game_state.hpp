@@ -31,6 +31,9 @@ class game_state : public state {
     float last_object_speed_increase_time;
     float object_spawn_interval_decrease_interval;
     float last_object_spawn_interval_decrease_time;
+    
+    unsigned int score;
+    unsigned int score_increase;
 
    private:
     void obstacles_update(float dt);

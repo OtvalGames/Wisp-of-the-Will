@@ -1,7 +1,5 @@
 #include "game_state.hpp"
 
-#include <iostream>
-
 #include "pause_state.hpp"
 #include "resources.hpp"
 
@@ -49,6 +47,9 @@ void game_state::init() {
     last_object_speed_increase_time = 0.0f;
     object_spawn_interval_decrease_interval = 5.0f;
     last_object_spawn_interval_decrease_time = 0.0f;
+
+    score = 0;
+    score_increase = 10;
 }
 
 void game_state::handle_input() {
@@ -169,8 +170,10 @@ void game_state::obstacles_update(float dt) {
             _obstacles.at(i).move(sf::Vector2f(1, 0) * (object_speed * dt));
 
             if (_obstacles.at(i).get_global_bounds().left + _obstacles.at(i).get_global_bounds().width <
-                data->window.getView().getCenter().x - data->window.getView().getSize().x / 2)
+                data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
                 _obstacles.at(i).disable();
+                score += score_increase;
+            }
         }
     }
 }
