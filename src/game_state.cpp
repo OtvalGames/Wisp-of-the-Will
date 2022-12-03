@@ -153,6 +153,7 @@ void game_state::obstacles_update(float dt) {
     if (clock.getElapsedTime().asSeconds() - last_object_speed_increase_time >=
         object_speed_increase_interval) {
         object_speed += object_speed_increase;
+        _walls->set_move_speed(object_speed);
         last_object_speed_increase_time = clock.getElapsedTime().asSeconds();
     }
 
