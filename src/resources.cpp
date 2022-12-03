@@ -1,6 +1,7 @@
 #include "resources.hpp"
 
 //#include <cmath>
+#include <fstream>
 
 void fit_sprite_size(sf::Sprite& object, const sf::Vector2f exp_size) {
     const sf::FloatRect& bounds = object.getGlobalBounds();
@@ -55,3 +56,26 @@ sf::Vector2f tile_pos_to_coords(int pos_x, int pos_y, int tile_size) {
 //         logo_height + button_height * 2);
 //     }
 // }
+
+unsigned int get_score_from_save() {
+    int score = 0;
+
+    std::ifstream file(MAX_SCORE_FILEPATH);
+
+    if (file.is_open()) {
+        std::string str;
+        file >> score;
+
+        if (score < 0) score = 0;
+    }
+
+    return score;
+}
+
+void write_score_to_save(unsigned int score) {
+    std::ofstream file(MAX_SCORE_FILEPATH);
+
+    if (file.is_open()) {
+        file << score << std::endl;
+    }
+}

@@ -64,4 +64,8 @@ sf::Vector2f tile_pos_to_coords(int pos_x, int pos_y, int tile_size);
 // void center_sprite_horizontally(sf::Sprite& object, const sf::Window& win);
 // void place_menu_button(sf::Sprite& _logo, sf::Sprite* upper_button, sf::Sprite* current_button);
 
+// Save
+unsigned int get_score_from_save();
+void write_score_to_save(unsigned int score);
+
 #endif  // RESOURCES_HPP

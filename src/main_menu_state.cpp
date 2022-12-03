@@ -1,7 +1,5 @@
 #include "main_menu_state.hpp"
 
-#include <fstream>
-
 #include "game_state.hpp"
 #include "resources.hpp"
 
@@ -51,17 +49,9 @@ void main_menu_state::init() {
     best_score.setFont(score_font);
     best_score.setCharacterSize(35);
 
-    std::ifstream file(MAX_SCORE_FILEPATH);
+    unsigned int score = get_score_from_save();
 
-    if (file.is_open()) {
-        std::string tmp;
-        file >> tmp;
-
-        if (tmp.length())
-            best_score.setString("Best score: " + tmp);
-        else
-            best_score.setString("Best score: -");
-    }
+    best_score.setString("Best score: " + std::to_string(score));
 
     best_score.setPosition(
         bg.getPosition().x + bg.getGlobalBounds().width / 2 - best_score.getGlobalBounds().width / 2,

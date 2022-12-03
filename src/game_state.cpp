@@ -1,7 +1,5 @@
 #include "game_state.hpp"
 
-#include <fstream>
-
 #include "pause_state.hpp"
 #include "resources.hpp"
 
@@ -52,13 +50,7 @@ void game_state::init() {
 
     score = 0;
     score_increase = 10;
-
-    std::ifstream file(MAX_SCORE_FILEPATH);
-
-    if (file.is_open()) {
-        file >> max_score;
-        file.close();
-    }
+    max_score = get_score_from_save();
 
     score_font.loadFromFile(FONT_IMPACT);
 
@@ -159,12 +151,7 @@ void game_state::objects_spawn() {
 }
 
 void game_state::max_score_save() {
-    std::ofstream file(MAX_SCORE_FILEPATH);
-
-    int tmp;
-    file << tmp;
-
-    file.close();
+    write_score_to_save(score);
 }
 
 void game_state::obstacles_update(float dt) {
