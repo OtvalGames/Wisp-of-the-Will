@@ -5,12 +5,14 @@
 #include "obstacle.hpp"
 #include "state.hpp"
 #include "walls.hpp"
+#include "player.hpp"
 
 namespace yapg {
 class game_state : public state {
    private:
     game_data_ptr data;
     sf::Clock clock;
+    player_ player;
 
     walls* _walls;
 
@@ -47,6 +49,7 @@ class game_state : public state {
 
     void max_score_save();
 
+    friend bool is_player_hit_obstacle(game_state& gs);
    public:
     game_state(game_data_ptr _data);
 

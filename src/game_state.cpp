@@ -1,10 +1,11 @@
 #include "game_state.hpp"
 
+#include "main_menu_state.hpp"
 #include "pause_state.hpp"
 #include "resources.hpp"
 
 namespace yapg {
-game_state::game_state(game_data_ptr _data) : data(_data) {}
+game_state::game_state(game_data_ptr _data) : data(_data), player(_data) {}
 
 void game_state::init() {
     srand(time(NULL));
@@ -12,6 +13,9 @@ void game_state::init() {
     data->assets.load_texture("Obstacles", OBSTACLES_FILEPATH);
 
     _walls = new walls(data);
+
+    player.set_position(sf::Vector2f(player.get_position().x - data->window.getSize().x / 4,
+                                     player.get_position().y));
 
     int obstacles_pool_count = 10;
 
@@ -73,6 +77,16 @@ void game_state::handle_input() {
             if (e.key.code == sf::Keyboard::Escape) {
                 max_score_save();
                 data->machine.add_state(state_ptr(new pause_state(data)));
+            }
+            else if (e.key.code == sf::Keyboard::W) {
+                // Move 1 line up
+                if (player.get_position().y >= 0)
+                    player.get_sprite().move(0, -64);
+            }
+            else if (e.key.code == sf::Keyboard::S) {
+                // Move 1 line down
+                if (player.get_position().y <= 0)
+                    player.get_sprite().move(0, 64);
             }
         }
     }
@@ -194,10 +208,29 @@ void game_state::obstacles_update(float dt) {
     }
 }
 
+bool is_player_hit_obstacle(game_state& gs) {
+    sf::Sprite player_sprite = gs.player.get_sprite();
+
+    for (obstacle& obstacle : gs._obstacles) {
+        if (!obstacle.active()) continue;
+
+        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
-    // if (player_death) if (score > max_score) save_max_score();
+
+    if (is_player_hit_obstacle(*this)) {
+        // Player hit an obstacle and died
+        max_score_save();
+        data->machine.replace_state(state_ptr(new main_menu_state(data)));
+    }
 }
 
 void game_state::draw(float dt) {
@@ -207,6 +240,8 @@ void game_state::draw(float dt) {
 
     for (int i = 0; i < _obstacles.size(); i++)
         if (_obstacles.at(i).active()) _obstacles.at(i).draw();
+
+    player.draw();
 
     data->window.draw(score_text);
 
