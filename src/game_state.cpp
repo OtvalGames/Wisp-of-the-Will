@@ -19,7 +19,7 @@ void game_state::init() {
     player.set_position(
         sf::Vector2f(player.get_position().x - data->window.getSize().x / 4, player.get_position().y));
 
-    int obstacles_pool_count = 10;
+    int obstacles_pool_count = 20;
 
     for (int i = 0; i < obstacles_pool_count; i++) {
         obstacle obst(data);
