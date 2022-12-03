@@ -3,6 +3,8 @@
 #include "pause_state.hpp"
 #include "resources.hpp"
 
+#include <fstream>
+
 namespace yapg {
 game_state::game_state(game_data_ptr _data) : data(_data) {}
 
@@ -50,6 +52,13 @@ void game_state::init() {
 
     score = 0;
     score_increase = 10;
+
+    std::ifstream file(MAX_SCORE_FILEPATH);
+
+    if (file.is_open()) {
+        file >> max_score;
+        file.close();
+    }
 }
 
 void game_state::handle_input() {
@@ -142,6 +151,15 @@ void game_state::objects_spawn() {
     }
 }
 
+void game_state::max_score_save() {
+    std::ofstream file(MAX_SCORE_FILEPATH);
+
+    int tmp;
+    file << tmp;
+
+    file.close();
+}
+
 void game_state::obstacles_update(float dt) {
     if (clock.getElapsedTime().asSeconds() - last_object_spawn_time >= object_spawn_interval) {
         objects_spawn();
@@ -181,6 +199,7 @@ void game_state::obstacles_update(float dt) {
 void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
+    // if (player_death) if (score > max_score) save_max_score();
 }
 
 void game_state::draw(float dt) {

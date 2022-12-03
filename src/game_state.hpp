@@ -34,12 +34,15 @@ class game_state : public state {
     
     unsigned int score;
     unsigned int score_increase;
+    unsigned int max_score;
 
    private:
     void obstacles_update(float dt);
     void objects_spawn();
     obstacle& get_free_obstacle(std::vector<obstacle>& arr);
     void set_rand_obstacle_texture(obstacle& _obstacle);
+
+    void max_score_save();
 
    public:
     game_state(game_data_ptr _data);
