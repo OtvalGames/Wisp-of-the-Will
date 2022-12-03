@@ -15,6 +15,8 @@ struct game_data {
 
 typedef std::shared_ptr<game_data> game_data_ptr;
 
+constexpr int framerate = 144;
+
 class game {
    public:
     game();
@@ -22,7 +24,7 @@ class game {
    private:
     void run();
 
-    const float dt = 1.0f / 60;
+    const float dt = 1.0f / framerate;
     sf::Clock clock;
 
     game_data_ptr data = std::make_shared<game_data>();

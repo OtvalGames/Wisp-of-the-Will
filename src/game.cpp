@@ -11,7 +11,7 @@ game::game() {
     // sf::Style::Fullscreen, settings);
     data->window.create(sf::VideoMode().getFullscreenModes().at(2), "YAPG", sf::Style::Default,
                         settings);
-    data->window.setFramerateLimit(144);
+    data->window.setFramerateLimit(framerate);
     data->window.setPosition(sf::Vector2i(0, 0));
     data->window.setKeyRepeatEnabled(false);
 
@@ -30,7 +30,7 @@ void game::run() {
     float current_time = clock.getElapsedTime().asSeconds();
     float accumulator = 0.0f;
 
-    const float max_frame_time = 0.25f;
+    constexpr float max_frame_time = 0.25f;
 
     while (data->window.isOpen()) {
         data->machine.state_change_process();
