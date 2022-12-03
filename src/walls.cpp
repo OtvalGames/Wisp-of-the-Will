@@ -27,11 +27,14 @@ void walls::move(float dt) {
     for (int i = 0; i < sprites.size(); i++) {
         sprites.at(i).move(sf::Vector2f(1, 0) * (move_speed * dt));
 
-        if (sprites.at(i).getGlobalBounds().left + sprites.at(i).getGlobalBounds().width <=
-            data->window.getView().getCenter().x - data->window.getView().getSize().x / 2)
-            sprites.at(i).setPosition(sf::Vector2f(
-                data->window.getView().getCenter().x + data->window.getView().getSize().x / 2,
-                sprites.at(i).getPosition().y));
+        if (sprites.at(i).getGlobalBounds().left + sprites.at(i).getGlobalBounds().width <
+            data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
+            int j = (i + 1) % 2;
+
+            sprites.at(i).setPosition(
+                sf::Vector2f(sprites.at(j).getGlobalBounds().left + sprites.at(j).getGlobalBounds().width + (move_speed * dt),
+                             sprites.at(i).getPosition().y));
+        }
     }
 }
 
