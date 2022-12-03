@@ -30,6 +30,9 @@ void splash_state::handle_input() {
 }
 
 void splash_state::update(float dt) {
+    constexpr float splash_fade_time = 1.0;
+    constexpr float splash_show_time = 3.5;
+
     float time_elapsed = clock.getElapsedTime().asSeconds();
 
     if (time_elapsed > splash_show_time)

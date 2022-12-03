@@ -74,6 +74,8 @@ void pause_state::handle_input() {
 }
 
 void pause_state::update(float dt) {
+    constexpr float splash_fade_time = 0.7;
+
     float time_elapsed = clock.getElapsedTime().asSeconds();
 
     if (time_elapsed < splash_fade_time) {

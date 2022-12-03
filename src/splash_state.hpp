@@ -5,9 +5,6 @@
 #include "state.hpp"
 
 namespace yapg {
-constexpr float splash_fade_time = 1.0;
-constexpr float splash_show_time = 3.5;
-
 class splash_state : public state {
    private:
     game_data_ptr data;

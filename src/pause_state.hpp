@@ -6,7 +6,6 @@
 #include "timer.hpp"
 
 namespace yapg {
-constexpr float splash_fade_time = 0.7;
 constexpr int pause_buttons_count = 2;
 
 class pause_state : public state {
