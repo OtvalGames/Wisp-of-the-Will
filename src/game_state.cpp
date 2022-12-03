@@ -42,10 +42,10 @@ void game_state::init() {
     last_object_spawn_time = 0.0f;
 
     object_speed = -200.0f;
-    object_speed_increase = -20.0f;
+    object_speed_increase = -5.0f;
     object_speed_max = -700.0f;
 
-    object_speed_increase_interval = 5.0f;
+    object_speed_increase_interval = 1.0f;
     last_object_speed_increase_time = 0.0f;
     object_spawn_interval_decrease_interval = 5.0f;
     last_object_spawn_interval_decrease_time = 0.0f;
@@ -149,15 +149,19 @@ void game_state::obstacles_update(float dt) {
 
     if (clock.getElapsedTime().asSeconds() - last_object_spawn_interval_decrease_time >=
         object_spawn_interval_decrease_interval) {
-        object_spawn_interval -= object_spawn_interval_decrease;
-        last_object_spawn_interval_decrease_time = clock.getElapsedTime().asSeconds();
+        if (object_spawn_interval > object_spawn_interval_min) {
+            object_spawn_interval -= object_spawn_interval_decrease;
+            last_object_spawn_interval_decrease_time = clock.getElapsedTime().asSeconds();
+        }
     }
 
     if (clock.getElapsedTime().asSeconds() - last_object_speed_increase_time >=
         object_speed_increase_interval) {
-        object_speed += object_speed_increase;
-        _walls->set_move_speed(object_speed);
-        last_object_speed_increase_time = clock.getElapsedTime().asSeconds();
+        if (std::abs(object_speed) < std::abs(object_speed_max)) {
+            object_speed += object_speed_increase;
+            _walls->set_move_speed(object_speed);
+            last_object_speed_increase_time = clock.getElapsedTime().asSeconds();
+        }
     }
 
     for (int i = 0; i < _obstacles.size(); i++) {
