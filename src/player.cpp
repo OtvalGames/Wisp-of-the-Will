@@ -4,11 +4,11 @@
 
 namespace yapg {
 
-player::player(game_data_ptr _data) {
+player_::player_(game_data_ptr _data) {
     init(_data);
 }
 
-void player::init(game_data_ptr _data) {
+void player_::init(game_data_ptr _data) {
     data = _data;
 
     animations = new std::vector<sf::Texture>[4];
@@ -37,7 +37,7 @@ void player::init(game_data_ptr _data) {
         sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
 }
 
-void player::animate() {
+void player_::animate() {
     constexpr float animation_frames_interval = 0.125;
     constexpr int right_animation_index = 3;
 
@@ -53,11 +53,11 @@ void player::animate() {
     }
 }
 
-void player::draw() {
+void player_::draw() {
     data->window.draw(sprite);
 }
 
-void player::handle_input(sf::Event event) {
+void player_::handle_input(sf::Event event) {
     if (event.type == sf::Event::KeyPressed) {
         if (event.key.code == sf::Keyboard::W) {
             direction = direction::up;
@@ -69,21 +69,21 @@ void player::handle_input(sf::Event event) {
     }
 }
 
-//void player::movement(float dt) {
+//void player_::movement(float dt) {
 //    move((float)vspeed * dt);
 //}
 
 
-void player::set_speed(unsigned int _speed) { vspeed = _speed; }
+void player_::set_speed(unsigned int _speed) { vspeed = _speed; }
 
-unsigned int player::get_speed() { return vspeed; }
+unsigned int player_::get_speed() { return vspeed; }
 
-void player::set_position(sf::Vector2f point) { sprite.setPosition(point); }
+void player_::set_position(sf::Vector2f point) { sprite.setPosition(point); }
 
-sf::Vector2f player::get_position() { return sprite.getPosition(); }
+sf::Vector2f player_::get_position() { return sprite.getPosition(); }
 
-unsigned int player::get_direction() { return direction; }
+unsigned int player_::get_direction() { return direction; }
 
-sf::Sprite& player::get_sprite() { return sprite; }
+sf::Sprite& player_::get_sprite() { return sprite; }
 
 }  // namespace yapg

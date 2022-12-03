@@ -6,9 +6,9 @@
 namespace yapg {
 enum direction { up, down, stay };
 
-class player {
+class player_ {
    public:
-    player(game_data_ptr _data);
+    player_(game_data_ptr _data);
 
     void init(game_data_ptr _data);
 

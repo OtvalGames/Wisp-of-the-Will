@@ -4,7 +4,7 @@
 #include "resources.hpp"
 
 namespace yapg {
-game_state::game_state(game_data_ptr _data) : data(_data) {}
+game_state::game_state(game_data_ptr _data) : data(_data), player(_data) {}
 
 void game_state::init() {
     srand(time(NULL));
