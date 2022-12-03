@@ -41,15 +41,15 @@ void game_state::init() {
     lines[2].y = data->window.getView().getCenter().y + tile_size / 2;
 
     object_spawn_interval = 2.5f;
-    object_spawn_interval_decrease = 0.05f;
+    object_spawn_interval_decrease = 0.1f;
     object_spawn_interval_min = 0.5f;
     last_object_spawn_time = 0.0f;
 
     object_speed = -200.0f;
     object_speed_increase = -5.0f;
-    object_speed_max = -700.0f;
+    object_speed_max = -750.0f;
 
-    object_speed_increase_interval = 1.0f;
+    object_speed_increase_interval = 0.3f;
     last_object_speed_increase_time = 0.0f;
     object_spawn_interval_decrease_interval = 5.0f;
     last_object_spawn_interval_decrease_time = 0.0f;
