@@ -17,6 +17,9 @@ class main_menu_state : public state {
     sf::Sprite bg;
     std::deque<sf::Sprite*> buttons;
 
+    sf::Text best_score;
+    sf::Font score_font;
+
    public:
     main_menu_state(game_data_ptr _data);
 

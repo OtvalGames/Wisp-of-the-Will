@@ -1,5 +1,7 @@
 #include "main_menu_state.hpp"
 
+#include <fstream>
+
 #include "game_state.hpp"
 #include "resources.hpp"
 
@@ -43,6 +45,27 @@ void main_menu_state::init() {
     buttons.at(buttons::exit)
         ->setPosition(stat_button->getPosition().x,
                       stat_button->getPosition().y + stat_button->getGlobalBounds().height * 1.5);
+
+    score_font.loadFromFile(FONT_IMPACT);
+
+    best_score.setFont(score_font);
+    best_score.setCharacterSize(35);
+
+    std::ifstream file(MAX_SCORE_FILEPATH);
+
+    if (file.is_open()) {
+        std::string tmp;
+        file >> tmp;
+
+        if (tmp.length())
+            best_score.setString("Best score: " + tmp);
+        else
+            best_score.setString("Best score: -");
+    }
+
+    best_score.setPosition(
+        bg.getPosition().x + bg.getGlobalBounds().width / 2 - best_score.getGlobalBounds().width / 2,
+        bg.getPosition().y + bg.getGlobalBounds().height / 3 - best_score.getGlobalBounds().height);
 }
 
 void main_menu_state::handle_input() {
@@ -73,6 +96,8 @@ void main_menu_state::draw(float dt) {
 
     data->window.draw(bg);
     for (const sf::Sprite* b : buttons) data->window.draw(*b);
+
+    data->window.draw(best_score);
 
     data->window.display();
 }
