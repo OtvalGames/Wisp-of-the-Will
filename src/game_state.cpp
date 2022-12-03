@@ -93,7 +93,7 @@ void game_state::handle_input() {
 
 void game_state::set_rand_obstacle_texture(obstacle& _obstacle) {
     _obstacle.set_texture(data->assets.get_texture("Obstacles"));
-    _obstacle.set_texture_rect(sf::IntRect((rand() % 4) * tile_size, 0, tile_size, tile_size));
+    _obstacle.set_texture_rect(sf::IntRect((rand() % 6) * tile_size, 0, tile_size, tile_size));
 }
 
 obstacle& game_state::get_free_obstacle(std::vector<obstacle>& arr) {
