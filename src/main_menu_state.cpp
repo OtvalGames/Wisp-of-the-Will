@@ -18,7 +18,6 @@ void main_menu_state::init() {
 
     // Buttons
     data->assets.load_texture("Play Button", PLAY_BUTTON_FILEPATH);
-    data->assets.load_texture("Stat Button", STAT_BUTTON_FILEPATH);
     data->assets.load_texture("Exit Button", EXIT_BUTTON_FILEPATH);
 
     for (int i = 0; i < menu_buttons_count; i++) {
@@ -32,19 +31,12 @@ void main_menu_state::init() {
         bg.getPosition().x + bg.getGlobalBounds().width / 2 - play_button->getGlobalBounds().width / 2,
         bg.getPosition().y + bg.getGlobalBounds().height / 2 - play_button->getGlobalBounds().height);
 
-    // Stat button
-    sf::Sprite* stat_button = buttons.at(buttons::stat);
-    stat_button->setTexture(data->assets.get_texture("Stat Button"));
-    stat_button->setPosition(
-        play_button->getPosition().x,
-        play_button->getPosition().y + play_button->getGlobalBounds().height * menu_buttons_gap_mul);
-
     // Exit button
     buttons.at(buttons::exit)->setTexture(data->assets.get_texture("Exit Button"));
     buttons.at(buttons::exit)
         ->setPosition(
-            stat_button->getPosition().x,
-            stat_button->getPosition().y + stat_button->getGlobalBounds().height * menu_buttons_gap_mul);
+            play_button->getPosition().x,
+            play_button->getPosition().y + play_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     score_font.loadFromFile(FONT_IMPACT);
 
@@ -69,9 +61,6 @@ void main_menu_state::handle_input() {
         if (is_clicked(*buttons.at(buttons::play), sf::Mouse::Left, data->window)) {
             // Go button clicked
             data->machine.replace_state(state_ptr(new game_state(data)));
-        } else if (is_clicked(*buttons.at(buttons::stat), sf::Mouse::Left, data->window)) {
-            // Stat button clicked
-            // TODO: Remove stats button
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked
             data->window.close();
