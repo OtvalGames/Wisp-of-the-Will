@@ -51,7 +51,13 @@ void pause_state::handle_input() {
             data->machine.remove_state();
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked
-            data->machine.replace_state(state_ptr(new main_menu_state(data)));
+
+            // Delete pause state
+            data->machine.remove_state();
+            // Delete game state
+            data->machine.remove_state();
+            // Start main menu state
+            data->machine.add_state(state_ptr(new main_menu_state(data)));
         }
     }
 }

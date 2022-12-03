@@ -53,7 +53,7 @@ void main_menu_state::handle_input() {
 
         if (is_clicked(*buttons.at(buttons::play), sf::Mouse::Left, data->window)) {
             // Go button clicked
-            data->machine.add_state(state_ptr(new game_state(data)));
+            data->machine.replace_state(state_ptr(new game_state(data)));
         } else if (is_clicked(*buttons.at(buttons::stat), sf::Mouse::Left, data->window)) {
             // Stat button clicked
             // SHOW STATS
