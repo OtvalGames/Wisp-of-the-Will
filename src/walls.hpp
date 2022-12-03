@@ -14,12 +14,15 @@ class walls {
     void move(float dt);
     void draw();
 
+    void set_move_speed(float _speed);
+    int get_move_speed();
+
    private:
     game_data_ptr data;
 
     std::vector<sf::Sprite> sprites;
 
-    int move_speed;
+    float move_speed;
 };
 }  // namespace yapg
 
