@@ -19,7 +19,7 @@ void game_state::init() {
     player.set_position(
         sf::Vector2f(player.get_position().x - data->window.getSize().x / 4, player.get_position().y));
 
-    int obstacles_pool_count = 20;
+    constexpr int obstacles_pool_count = 20;
 
     for (int i = 0; i < obstacles_pool_count; i++) {
         obstacle obst(data);
@@ -162,7 +162,7 @@ void game_state::objects_spawn() {
         tmp2.set_position(lines[2]);
         set_rand_obstacle_texture(tmp2);
     } else {
-        // spawn bonus bobonus
+        // TODO: Spawn bonus
     }
 }
 
@@ -193,16 +193,16 @@ void game_state::obstacles_update(float dt) {
         }
     }
 
-    for (int i = 0; i < _obstacles.size(); i++) {
-        if (_obstacles.at(i).active()) {
-            _obstacles.at(i).move(sf::Vector2f(1, 0) * (object_speed * dt));
+    for (obstacle& obstacle : _obstacles) {
+        if (!obstacle.active()) continue;
 
-            if (_obstacles.at(i).get_global_bounds().left + _obstacles.at(i).get_global_bounds().width <
-                data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
-                _obstacles.at(i).disable();
-                score += score_increase;
-                score_text.setString("Score: " + std::to_string(score));
-            }
+        obstacle.move(sf::Vector2f(1, 0) * (object_speed * dt));
+
+        if (obstacle.get_global_bounds().left + obstacle.get_global_bounds().width <
+            data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
+            obstacle.disable();
+            score += score_increase;
+            score_text.setString("Score: " + std::to_string(score));
         }
     }
 }
@@ -213,9 +213,8 @@ bool is_player_hit_obstacle(game_state& gs) {
     for (obstacle& obstacle : gs._obstacles) {
         if (!obstacle.active()) continue;
 
-        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) {
+        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds()))
             return true;
-        }
     }
 
     return false;
@@ -227,6 +226,7 @@ void game_state::update(float dt) {
 
     if (is_player_hit_obstacle(*this)) {
         // Player hit an obstacle and died
+
         max_score_save();
         data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
     }
@@ -237,11 +237,10 @@ void game_state::draw(float dt) {
 
     _walls->draw();
 
-    for (int i = 0; i < _obstacles.size(); i++)
-        if (_obstacles.at(i).active()) _obstacles.at(i).draw();
+    for (obstacle& obstacle : _obstacles)
+        if (obstacle.active()) obstacle.draw();
 
     player.draw();
-
     data->window.draw(score_text);
 
     data->window.display();

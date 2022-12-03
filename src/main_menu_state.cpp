@@ -36,13 +36,13 @@ void main_menu_state::init() {
     sf::Sprite* stat_button = buttons.at(buttons::stat);
     stat_button->setTexture(data->assets.get_texture("Stat Button"));
     stat_button->setPosition(play_button->getPosition().x,
-                             play_button->getPosition().y + play_button->getGlobalBounds().height * 1.5);
+                             play_button->getPosition().y + play_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     // Exit button
     buttons.at(buttons::exit)->setTexture(data->assets.get_texture("Exit Button"));
     buttons.at(buttons::exit)
         ->setPosition(stat_button->getPosition().x,
-                      stat_button->getPosition().y + stat_button->getGlobalBounds().height * 1.5);
+                      stat_button->getPosition().y + stat_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     score_font.loadFromFile(FONT_IMPACT);
 
@@ -69,7 +69,7 @@ void main_menu_state::handle_input() {
             data->machine.replace_state(state_ptr(new game_state(data)));
         } else if (is_clicked(*buttons.at(buttons::stat), sf::Mouse::Left, data->window)) {
             // Stat button clicked
-            // SHOW STATS
+            // TODO: Remove stats button
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked
             data->window.close();
@@ -77,14 +77,13 @@ void main_menu_state::handle_input() {
     }
 }
 
-void main_menu_state::update(float dt) {
-    //    float time_elapsed = clock.getElapsedTime().asSeconds();
-}
+void main_menu_state::update(float dt) { }
 
 void main_menu_state::draw(float dt) {
     data->window.clear();
 
     data->window.draw(bg);
+
     for (const sf::Sprite* b : buttons) data->window.draw(*b);
 
     data->window.draw(best_score);

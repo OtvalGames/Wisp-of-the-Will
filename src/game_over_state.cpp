@@ -13,7 +13,7 @@ void game_over_state::init() {
     data->assets.load_texture("Game Over Background", GAMEOVER_BG_FILEPATH);
     bg.setTexture(data->assets.get_texture("Game Over Background"));
 
-    bg.setPosition(-0.5 * data->window.getView().getSize().x, -0.5 * data->window.getView().getSize().y);
+    bg.setPosition(data->window.mapPixelToCoords(sf::Vector2i(0, 0)));
     fit_sprite_size(bg, sf::Vector2f(data->window.getSize()));
 
     // Dim
@@ -39,7 +39,7 @@ void game_over_state::init() {
     buttons.at(buttons::exit)->setTexture(data->assets.get_texture("Exit Button"));
     buttons.at(buttons::exit)
         ->setPosition(again_button->getPosition().x,
-                      again_button->getPosition().y + again_button->getGlobalBounds().height * 1.5);
+                      again_button->getPosition().y + again_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     // Score
     score_font.loadFromFile(FONT_IMPACT);
@@ -80,7 +80,6 @@ void game_over_state::handle_input() {
             // Exit button clicked
 
             is_exit = true;
-
             clock.restart();
         }
     }
