@@ -38,4 +38,4 @@ class game_over_state : public state {
 };
 }  // namespace yapg
 
-#endif // GAME_OVER_STATE_HPP
+#endif  // GAME_OVER_STATE_HPP

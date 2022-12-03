@@ -35,14 +35,16 @@ void main_menu_state::init() {
     // Stat button
     sf::Sprite* stat_button = buttons.at(buttons::stat);
     stat_button->setTexture(data->assets.get_texture("Stat Button"));
-    stat_button->setPosition(play_button->getPosition().x,
-                             play_button->getPosition().y + play_button->getGlobalBounds().height * menu_buttons_gap_mul);
+    stat_button->setPosition(
+        play_button->getPosition().x,
+        play_button->getPosition().y + play_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     // Exit button
     buttons.at(buttons::exit)->setTexture(data->assets.get_texture("Exit Button"));
     buttons.at(buttons::exit)
-        ->setPosition(stat_button->getPosition().x,
-                      stat_button->getPosition().y + stat_button->getGlobalBounds().height * menu_buttons_gap_mul);
+        ->setPosition(
+            stat_button->getPosition().x,
+            stat_button->getPosition().y + stat_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     score_font.loadFromFile(FONT_IMPACT);
 
@@ -77,7 +79,7 @@ void main_menu_state::handle_input() {
     }
 }
 
-void main_menu_state::update(float dt) { }
+void main_menu_state::update(float dt) {}
 
 void main_menu_state::draw(float dt) {
     data->window.clear();

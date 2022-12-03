@@ -213,8 +213,7 @@ bool is_player_hit_obstacle(game_state& gs) {
     for (obstacle& obstacle : gs._obstacles) {
         if (!obstacle.active()) continue;
 
-        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds()))
-            return true;
+        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) return true;
     }
 
     return false;

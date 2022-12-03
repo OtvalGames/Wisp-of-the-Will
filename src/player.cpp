@@ -16,8 +16,9 @@ void player_::init(game_data_ptr _data) {
 
     for (int i = 0; i < player_sprite_size * frames_count; i += player_sprite_size) {
         sf::Texture texture;
-        texture.loadFromImage(player_animations_image, sf::IntRect(i, sprite_line * player_sprite_size,
-                                                               player_sprite_size, player_sprite_size));
+        texture.loadFromImage(
+            player_animations_image,
+            sf::IntRect(i, sprite_line * player_sprite_size, player_sprite_size, player_sprite_size));
 
         animations.push_back(texture);
     }

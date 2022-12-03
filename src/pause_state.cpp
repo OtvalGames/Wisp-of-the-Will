@@ -39,8 +39,9 @@ void pause_state::init() {
     // Exit button
     buttons.at(buttons::exit)->setTexture(data->assets.get_texture("Exit Button"));
     buttons.at(buttons::exit)
-        ->setPosition(go_button->getPosition().x,
-                      go_button->getPosition().y + go_button->getGlobalBounds().height * menu_buttons_gap_mul);
+        ->setPosition(
+            go_button->getPosition().x,
+            go_button->getPosition().y + go_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     is_exit = false;
 }
