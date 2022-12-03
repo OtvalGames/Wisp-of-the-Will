@@ -1,6 +1,6 @@
 #include "game_state.hpp"
 
-#include <iostream>
+#include <fstream>
 
 #include "pause_state.hpp"
 #include "resources.hpp"
@@ -49,6 +49,23 @@ void game_state::init() {
     last_object_speed_increase_time = 0.0f;
     object_spawn_interval_decrease_interval = 5.0f;
     last_object_spawn_interval_decrease_time = 0.0f;
+
+    score = 0;
+    score_increase = 10;
+
+    std::ifstream file(MAX_SCORE_FILEPATH);
+
+    if (file.is_open()) {
+        file >> max_score;
+        file.close();
+    }
+
+    score_font.loadFromFile(FONT_IMPACT);
+
+    score_text.setFont(score_font);
+    score_text.setCharacterSize(35);
+    score_text.setPosition(data->window.getView().getCenter() - data->window.getView().getSize() / 2.0f + sf::Vector2f(10, 10));
+    score_text.setString("Score: 0");
 }
 
 void game_state::handle_input() {
@@ -141,6 +158,15 @@ void game_state::objects_spawn() {
     }
 }
 
+void game_state::max_score_save() {
+    std::ofstream file(MAX_SCORE_FILEPATH);
+
+    int tmp;
+    file << tmp;
+
+    file.close();
+}
+
 void game_state::obstacles_update(float dt) {
     if (clock.getElapsedTime().asSeconds() - last_object_spawn_time >= object_spawn_interval) {
         objects_spawn();
@@ -169,8 +195,11 @@ void game_state::obstacles_update(float dt) {
             _obstacles.at(i).move(sf::Vector2f(1, 0) * (object_speed * dt));
 
             if (_obstacles.at(i).get_global_bounds().left + _obstacles.at(i).get_global_bounds().width <
-                data->window.getView().getCenter().x - data->window.getView().getSize().x / 2)
+                data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
                 _obstacles.at(i).disable();
+                score += score_increase;
+                score_text.setString("Score: " + std::to_string(score));
+            }
         }
     }
 }
@@ -178,6 +207,7 @@ void game_state::obstacles_update(float dt) {
 void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
+    // if (player_death) if (score > max_score) save_max_score();
 }
 
 void game_state::draw(float dt) {
@@ -187,6 +217,8 @@ void game_state::draw(float dt) {
 
     for (int i = 0; i < _obstacles.size(); i++)
         if (_obstacles.at(i).active()) _obstacles.at(i).draw();
+
+    data->window.draw(score_text);
 
     data->window.display();
 }

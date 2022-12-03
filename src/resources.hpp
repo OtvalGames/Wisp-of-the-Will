@@ -4,12 +4,13 @@
 #include <SFML/Graphics.hpp>
 
 #define LOGO_FILEPATH "res/images/og_logo.png"
+#define MAX_SCORE_FILEPATH "res/save/max_score.txt"
 //#define PLAYER_HP_BAR_FRAME "res/images/player_hp_frame.png"
 //#define PLAYER_HP_BAR_LINE "res/images/player_hp_line.png"
 //#define EXP_FRAME "res/images/exp_bar_frame.png"
 //#define EXP_LINE "res/images/exp_bar_line.png"
 //#define CRYSTAL_FILEPATH "res/images/crystal1.png"
-//#define FONT_IMPACT "res/font_impact.ttf"
+#define FONT_IMPACT "res/font_impact.ttf"
 //#define FONT_ALEGREYA "res/font_alegreya.ttf"
 
 // Menu
