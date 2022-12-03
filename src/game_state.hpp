@@ -6,12 +6,14 @@
 #include "player.hpp"
 #include "state.hpp"
 #include "walls.hpp"
+#include "timer.hpp"
 
 namespace yapg {
 class game_state : public state {
    private:
     game_data_ptr data;
-    sf::Clock clock;
+    timer clock;
+
     player_ player;
 
     walls* _walls;

@@ -4,7 +4,10 @@
 #include "resources.hpp"
 
 namespace yapg {
-pause_state::pause_state(game_data_ptr _data) : data(_data) {}
+pause_state::pause_state(game_data_ptr _data, timer* _game_timer)
+    : data(_data), game_timer_ptr(_game_timer) {
+    game_timer_ptr->pause();
+}
 
 void pause_state::init() {
     // BG
@@ -50,12 +53,15 @@ void pause_state::handle_input() {
 
         if (e.type == sf::Event::KeyPressed)
             if (e.key.code == sf::Keyboard::Escape) {
+                game_timer_ptr->start();
                 data->machine.remove_state();
                 break;
             }
 
         if (is_clicked(*buttons.at(buttons::go), sf::Mouse::Left, data->window)) {
             // Go button clicked
+            game_timer_ptr->start();
+
             data->machine.remove_state();
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked

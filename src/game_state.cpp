@@ -79,7 +79,7 @@ void game_state::handle_input() {
         if (e.type == sf::Event::KeyPressed) {
             if (e.key.code == sf::Keyboard::Escape) {
                 max_score_save();
-                data->machine.add_state(state_ptr(new pause_state(data)));
+                data->machine.add_state(state_ptr(new pause_state(data, &clock)));
             } else if (e.key.code == sf::Keyboard::W) {
                 // Move 1 line up
                 if (player.get_position().y >= 0) player.get_sprite().move(0, 0 - tile_size);
@@ -171,25 +171,25 @@ void game_state::max_score_save() {
 }
 
 void game_state::obstacles_update(float dt) {
-    if (clock.getElapsedTime().asSeconds() - last_object_spawn_time >= object_spawn_interval) {
+    if (clock.get_elapsed_seconds() - last_object_spawn_time >= object_spawn_interval) {
         objects_spawn();
-        last_object_spawn_time = clock.getElapsedTime().asSeconds();
+        last_object_spawn_time = clock.get_elapsed_seconds();
     }
 
-    if (clock.getElapsedTime().asSeconds() - last_object_spawn_interval_decrease_time >=
+    if (clock.get_elapsed_seconds() - last_object_spawn_interval_decrease_time >=
         object_spawn_interval_decrease_interval) {
         if (object_spawn_interval > object_spawn_interval_min) {
             object_spawn_interval -= object_spawn_interval_decrease;
-            last_object_spawn_interval_decrease_time = clock.getElapsedTime().asSeconds();
+            last_object_spawn_interval_decrease_time = clock.get_elapsed_seconds();
         }
     }
 
-    if (clock.getElapsedTime().asSeconds() - last_object_speed_increase_time >=
+    if (clock.get_elapsed_seconds() - last_object_speed_increase_time >=
         object_speed_increase_interval) {
         if (std::abs(object_speed) < std::abs(object_speed_max)) {
             object_speed += object_speed_increase;
             _walls->set_move_speed(object_speed);
-            last_object_speed_increase_time = clock.getElapsedTime().asSeconds();
+            last_object_speed_increase_time = clock.get_elapsed_seconds();
         }
     }
 

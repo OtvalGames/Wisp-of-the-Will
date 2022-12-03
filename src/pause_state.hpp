@@ -3,6 +3,7 @@
 
 #include "game.hpp"
 #include "state.hpp"
+#include "timer.hpp"
 
 namespace yapg {
 constexpr float splash_fade_time = 0.7;
@@ -14,6 +15,7 @@ class pause_state : public state {
 
     game_data_ptr data;
     sf::Clock clock;
+    timer* game_timer_ptr;
 
     sf::Sprite bg;
     sf::RectangleShape dim;
@@ -22,7 +24,7 @@ class pause_state : public state {
     bool is_exit;
 
    public:
-    pause_state(game_data_ptr _data);
+    pause_state(game_data_ptr _data, timer* _game_timer);
 
     void init();
 
