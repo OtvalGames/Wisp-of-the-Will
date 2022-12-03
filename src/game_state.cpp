@@ -13,6 +13,9 @@ void game_state::init() {
 
     _walls = new walls(data);
 
+    player.set_position(sf::Vector2f(player.get_position().x - data->window.getSize().x / 4,
+                                     player.get_position().y));
+
     int obstacles_pool_count = 10;
 
     for (int i = 0; i < obstacles_pool_count; i++) {
