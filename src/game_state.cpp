@@ -47,9 +47,9 @@ void game_state::init() {
 
     object_speed = -200.0f;
     object_speed_increase = -5.0f;
-    object_speed_max = -750.0f;
+    object_speed_max = -900.0f;
 
-    object_speed_increase_interval = 0.3f;
+    object_speed_increase_interval = 0.4f;
     last_object_speed_increase_time = 0.0f;
     object_spawn_interval_decrease_interval = 5.0f;
     last_object_spawn_interval_decrease_time = 0.0f;
