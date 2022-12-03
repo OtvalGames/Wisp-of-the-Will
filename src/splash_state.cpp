@@ -25,7 +25,6 @@ void splash_state::handle_input() {
         if (e.type == sf::Event::Closed) data->window.close();
         if (kb::isKeyPressed(kb::Enter) || kb::isKeyPressed(kb::Escape) || kb::isKeyPressed(kb::Space))
             data->machine.replace_state(state_ptr(new main_menu_state(data)));
-        // data->window.close();
     }
 }
 
@@ -37,7 +36,6 @@ void splash_state::update(float dt) {
 
     if (time_elapsed > splash_show_time)
         data->machine.replace_state(state_ptr(new main_menu_state(data)));
-    // data->window.close();
 
     if (time_elapsed < splash_fade_time) {
         int dim_lvl = static_cast<int>(time_elapsed * 255 / splash_fade_time) % 255;
