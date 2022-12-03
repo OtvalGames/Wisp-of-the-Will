@@ -38,6 +38,8 @@ void pause_state::init() {
     buttons.at(buttons::exit)
         ->setPosition(go_button->getPosition().x,
                       go_button->getPosition().y + go_button->getGlobalBounds().height * 1.5);
+
+    is_exit = false;
 }
 
 void pause_state::handle_input() {
@@ -58,12 +60,9 @@ void pause_state::handle_input() {
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked
 
-            // Delete pause state
-            data->machine.remove_state();
-            // Delete game state
-            data->machine.remove_state();
-            // Start main menu state
-            data->machine.add_state(state_ptr(new main_menu_state(data)));
+            is_exit = true;
+
+            clock.restart();
         }
     }
 }
@@ -78,6 +77,22 @@ void pause_state::update(float dt) {
         dim.setFillColor(sf::Color(0, 0, 0, 255 - dim_lvl));
     } else
         dim.setFillColor(sf::Color(0, 0, 0, 0));
+
+    if (is_exit) {
+        if (time_elapsed < splash_fade_time) {
+            int dim_lvl = static_cast<int>(time_elapsed * 255 / splash_fade_time) % 255;
+
+            // BG Fade In
+            dim.setFillColor(sf::Color(0, 0, 0, 0 + dim_lvl));
+        } else {
+            dim.setFillColor(sf::Color(0, 0, 0, 255));
+
+            // Delete states
+            data->machine.clear_states();
+            // Start main menu state
+            data->machine.add_state(state_ptr(new main_menu_state(data)));
+        }
+    }
 }
 
 void pause_state::draw(float dt) {

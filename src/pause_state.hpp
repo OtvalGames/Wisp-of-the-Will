@@ -19,6 +19,8 @@ class pause_state : public state {
     sf::RectangleShape dim;
     std::deque<sf::Sprite*> buttons;
 
+    bool is_exit;
+
    public:
     pause_state(game_data_ptr _data);
 
