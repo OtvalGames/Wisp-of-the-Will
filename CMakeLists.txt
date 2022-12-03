@@ -16,7 +16,7 @@ target_sources(yapg PRIVATE ${_HEADER_FILES_} ${_SOURCE_FILES_})
 add_custom_command(
   TARGET yapg
   POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/res/
+  COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/res
           $<TARGET_FILE_DIR:yapg>/res)
 
 find_package(
