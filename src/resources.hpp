@@ -34,7 +34,7 @@
 //#define BONUS_SPEED "res/images/bonus_speed.png"
 //#define BONUS_ARMOR "res/images/bonus_armor.png"
 
-//#define PLAYER_ANIMATIONS_FILEPATH "res/images/player_animations.png"
+#define PLAYER_ANIMATIONS_FILEPATH "res/images/player_animations.png"
 //#define PLAYER_SPHERE_FILEPATH "res/images/player_sphere.png"
 //#define PLAYER_WISP_FILEPATH "res/images/player_wisp.png"
 
