@@ -23,7 +23,6 @@ void player_::init(game_data_ptr _data) {
 
         animations.push_back(tmp);
     }
-    direction = direction::stay;
 
     animation_iterator = 0;
     sprite.setTexture(animations.at(0));
@@ -54,22 +53,7 @@ void player_::draw() {
     data->window.draw(sprite);
 }
 
-void player_::handle_input(sf::Event event) {
-    if (event.type == sf::Event::KeyPressed) {
-        if (event.key.code == sf::Keyboard::W) {
-            direction = direction::up;
-        }
-        else if (event.key.code == sf::Keyboard::S) {
-            direction = direction::down;
-        }
-        else direction = direction::stay;
-    }
-}
-
-//void player_::movement(float dt) {
-//    move((float)vspeed * dt);
-//}
-
+void player_::handle_input(sf::Event event) { }
 
 void player_::set_speed(unsigned int _speed) { vspeed = _speed; }
 
@@ -78,8 +62,6 @@ unsigned int player_::get_speed() { return vspeed; }
 void player_::set_position(sf::Vector2f point) { sprite.setPosition(point); }
 
 sf::Vector2f player_::get_position() { return sprite.getPosition(); }
-
-unsigned int player_::get_direction() { return direction; }
 
 sf::Sprite& player_::get_sprite() { return sprite; }
 

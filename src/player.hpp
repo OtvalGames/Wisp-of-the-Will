@@ -4,8 +4,6 @@
 #include "game.hpp"
 
 namespace yapg {
-enum direction { up, down, stay };
-
 class player_ {
    public:
     player_(game_data_ptr _data);
@@ -26,8 +24,6 @@ class player_ {
     void set_position(sf::Vector2f point);
     sf::Vector2f get_position();
 
-    unsigned int get_direction();
-
     sf::Sprite& get_sprite();
 
    private:
@@ -38,7 +34,6 @@ class player_ {
     std::deque<sf::Texture> animations;
     unsigned int animation_iterator;
 
-    unsigned int direction;
     unsigned int vspeed;
 };
 }  // namespace yapg

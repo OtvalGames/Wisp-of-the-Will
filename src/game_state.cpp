@@ -78,6 +78,14 @@ void game_state::handle_input() {
                 max_score_save();
                 data->machine.add_state(state_ptr(new pause_state(data)));
             }
+            else if (e.key.code == sf::Keyboard::W) {
+                // Move 1 line up
+                player.get_sprite().move(0, -64);
+            }
+            else if (e.key.code == sf::Keyboard::S) {
+                // Move 1 line down
+                player.get_sprite().move(0, 64);
+            }
         }
     }
 }
@@ -215,6 +223,7 @@ bool is_player_hit_obstacle(game_state& gs) {
 void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
+
     if (is_player_hit_obstacle(*this)) {
         // Player hit an obstacle and died
         max_score_save();
