@@ -80,11 +80,13 @@ void game_state::handle_input() {
             }
             else if (e.key.code == sf::Keyboard::W) {
                 // Move 1 line up
-                player.get_sprite().move(0, -64);
+                if (player.get_position().y >= 0)
+                    player.get_sprite().move(0, -64);
             }
             else if (e.key.code == sf::Keyboard::S) {
                 // Move 1 line down
-                player.get_sprite().move(0, 64);
+                if (player.get_position().y <= 0)
+                    player.get_sprite().move(0, 64);
             }
         }
     }
