@@ -7,6 +7,7 @@
 
 // Save
 #define MAX_SCORE_FILEPATH "res/save/max_score.txt"
+#define CURRENT_SKIN_FILEPATH "res/save/current_skin.txt"
 
 // Backgrounds
 #define SPLASH_BG_FILEPATH "res/images/og_logo.png"
@@ -19,9 +20,18 @@
 #define PLAY_BUTTON_FILEPATH "res/images/button_play.png"
 #define AGAIN_BUTTON_FILEPATH "res/images/button_again.png"
 #define EXIT_BUTTON_FILEPATH "res/images/button_exit.png"
+#define ARROW_RIGHT_FILEPATH "res/images/arrow_right.png"
+#define ARROW_LEFT_FILEPATH "res/images/arrow_left.png"
 
 // Game objects
-#define PLAYER_ANIMATIONS_FILEPATH "res/images/player_animations.png"
+#define PLAYER_ANIM_CLASSIC_FILEPATH "res/images/player_anim_classic.png"
+#define PLAYER_ANIM_OUTLINE_FILEPATH "res/images/player_anim_outline.png"
+#define PLAYER_ANIM_SHARPEN_FILEPATH "res/images/player_anim_sharpen.png"
+#define PLAYER_ANIM_FIRE_FILEPATH "res/images/player_anim_fire.png"
+#define PLAYER_SKIN_PREVIEW_CLASSIC_FILEPATH "res/images/player_skin_preview_classic.png"
+#define PLAYER_SKIN_PREVIEW_OUTLINE_FILEPATH "res/images/player_skin_preview_outline.png"
+#define PLAYER_SKIN_PREVIEW_SHARPEN_FILEPATH "res/images/player_skin_preview_sharpen.png"
+#define PLAYER_SKIN_PREVIEW_FIRE_FILEPATH "res/images/player_skin_preview_fire.png"
 #define WALLS_FILEPATH "res/images/walls.png"
 #define OBSTACLES_FILEPATH "res/images/obstacles.png"
 

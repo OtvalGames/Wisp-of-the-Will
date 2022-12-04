@@ -1,5 +1,7 @@
 #include "player.hpp"
 
+#include <fstream>
+
 #include "resources.hpp"
 
 namespace yapg {
@@ -9,10 +11,20 @@ player_::player_(game_data_ptr _data) { init(_data); }
 void player_::init(game_data_ptr _data) {
     data = _data;
 
-    sf::Image player_animations_image;
-    player_animations_image.loadFromFile(PLAYER_ANIMATIONS_FILEPATH);
+    std::string animations_filepath = PLAYER_ANIM_CLASSIC_FILEPATH;
 
-    constexpr int sprite_line = 3;
+    std::ifstream current_skin_file(CURRENT_SKIN_FILEPATH);
+
+    if (current_skin_file.is_open()) {
+        current_skin_file >> animations_filepath;
+
+        current_skin_file.close();
+    }
+
+    sf::Image player_animations_image;
+    player_animations_image.loadFromFile(animations_filepath);
+
+    constexpr int sprite_line = 0;
 
     for (int i = 0; i < player_sprite_size * frames_count; i += player_sprite_size) {
         sf::Texture texture;
