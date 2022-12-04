@@ -19,6 +19,9 @@ void game_state::init() {
     player.set_position(
         sf::Vector2f(player.get_position().x - data->window.getSize().x / 4, player.get_position().y));
 
+    // All bonuses is disabled by default
+    for (int i = 0; i < bonus_count; i++) bonuses[i] = false;
+
     constexpr int obstacles_pool_count = 20;
 
     for (int i = 0; i < obstacles_pool_count; i++) {
@@ -67,6 +70,9 @@ void game_state::init() {
     score_text.setString("Score: 0");
 
     data->window.setMouseCursorVisible(false);
+
+    // TEMPORARY
+    bonuses[bonus::extra_life] = true;
 }
 
 void game_state::handle_input() {
@@ -215,7 +221,10 @@ bool is_player_hit_obstacle(game_state& gs) {
     for (obstacle& obstacle : gs._obstacles) {
         if (!obstacle.active()) continue;
 
-        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) return true;
+        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) {
+            obstacle.disable();
+            return true;
+        }
     }
 
     return false;
@@ -226,10 +235,16 @@ void game_state::update(float dt) {
     obstacles_update(dt);
 
     if (is_player_hit_obstacle(*this)) {
-        // Player hit an obstacle and died
+        if (bonuses[bonus::extra_life]) {
+            // Player hit an obstacle, but had extra life bonus
 
-        max_score_save();
-        data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
+            bonuses[bonus::extra_life] = false;
+        } else {
+            // Player hit an obstacle and died
+
+            max_score_save();
+            data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
+        }
     }
 }
 

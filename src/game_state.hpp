@@ -9,12 +9,17 @@
 #include "walls.hpp"
 
 namespace yapg {
+constexpr int bonus_count = 3;
+
+enum bonus { coin = 0, shield, extra_life};
+
 class game_state : public state {
    private:
     game_data_ptr data;
     timer clock;
 
     player_ player;
+    bool bonuses[3];
 
     walls* _walls;
 
