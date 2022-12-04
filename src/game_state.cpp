@@ -325,7 +325,6 @@ void game_state::update(float dt) {
         /* The message was shown for 3 seconds, so
          * the bonus effect has ended */
 
-        score += 20;
         coin_bonus_timer.pause();
         bonuses[coin] = false;
     }
@@ -340,6 +339,7 @@ void game_state::update(float dt) {
             bonuses[bt] = true;
 
             if (bt == coin) {
+                score += 20;
                 coin_bonus_timer.restart();
             }
             else if (bt == shield) {
