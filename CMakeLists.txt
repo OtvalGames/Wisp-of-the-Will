@@ -24,7 +24,7 @@ find_package(
   COMPONENTS graphics window system
   REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
-target_link_libraries(yapg sfml-graphics sfml-window sfml-system)
+target_link_libraries(yapg sfml-graphics sfml-window sfml-system sfml-audio)
 
 set_target_properties(yapg PROPERTIES LINK_FLAGS_RELEASE -s)
 

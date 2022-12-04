@@ -2,6 +2,7 @@
 #define MAIN_MENU_STATE_HPP
 
 #include <map>
+#include <SFML/Audio/Music.hpp>
 
 #include "game.hpp"
 #include "state.hpp"
@@ -34,6 +35,8 @@ class main_menu_state : public state {
     std::map<int, std::string> skins_filepaths;
 
     std::vector<sf::Sprite> arrows;
+
+    sf::Music music;
 
    public:
     main_menu_state(game_data_ptr _data);

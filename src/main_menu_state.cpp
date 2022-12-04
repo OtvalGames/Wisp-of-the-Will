@@ -124,19 +124,43 @@ void main_menu_state::init() {
         .setPosition(current_skin_preview->getGlobalBounds().left +
                          current_skin_preview->getGlobalBounds().width + 10,
                      current_skin_preview->getPosition().y + 15);
+
+    // Soundtrack
+    constexpr float default_volume = 25;
+
+    music.setLoop(true);
+    music.setVolume(default_volume);
+
+    if (music.openFromFile(OST_HM_DUST_FILEPATH)) music.play();
 }
 
 void main_menu_state::handle_input() {
     sf::Event e;
 
     while (data->window.pollEvent(e)) {
-        if (e.type == sf::Event::Closed) data->window.close();
+        if (e.type == sf::Event::Closed) {
+            music.stop();
+            data->window.close();
+        }
+
+        if (e.type == sf::Event::MouseWheelScrolled) {
+            // Change music volume by scrolling mouse wheel
+
+            float new_volume = music.getVolume() + e.mouseWheelScroll.delta;
+
+            if (new_volume - 100 > 0.01) new_volume = 100;
+            else if (new_volume < 0.01) new_volume = 0;
+
+            music.setVolume(new_volume);
+        }
 
         if (is_clicked(*buttons.at(buttons::play), sf::Mouse::Left, data->window)) {
-            // Go button clicked
+            // Play button clicked
+            music.stop();
             data->machine.replace_state(state_ptr(new game_state(data)));
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked
+            music.stop();
             data->window.close();
         } else if (is_clicked(arrows.at(arrows::left), sf::Mouse::Left, data->window)) {
             current_skin_id--;
@@ -160,7 +184,7 @@ void main_menu_state::handle_input() {
     }
 }
 
-void main_menu_state::update(float dt) {}
+void main_menu_state::update(float dt) { }
 
 void main_menu_state::draw(float dt) {
     data->window.clear();
@@ -173,7 +197,7 @@ void main_menu_state::draw(float dt) {
 
     data->window.draw(*current_skin_preview);
 
-    for (const sf::Sprite a : arrows) data->window.draw(a);
+    for (const sf::Sprite& a : arrows) data->window.draw(a);
 
     data->window.display();
 }

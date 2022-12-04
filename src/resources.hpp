@@ -38,6 +38,9 @@
 #define BONUS_SKIP_FILEPATH "res/images/bonus_skip.png"
 #define BONUS_SHIELD_FILEPATH "res/images/bonus_shield.png"
 
+// OST
+#define OST_HM_DUST_FILEPATH "res/audio/Dust.ogg"
+
 // Properties
 constexpr int player_sprite_size = 16;
 constexpr int frames_count = 9;
