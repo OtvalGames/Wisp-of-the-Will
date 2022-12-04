@@ -19,7 +19,9 @@ class game_state : public state {
     timer clock;
 
     player_ player;
+
     bool bonuses[3];
+    timer coin_bonus_timer;
 
     walls* _walls;
 

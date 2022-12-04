@@ -249,6 +249,8 @@ obstacle* player_hit_obstacle(game_state& gs) {
 }
 
 void game_state::update(float dt) {
+    constexpr float coin_bonus_show_time = 3.0;
+
     _walls->move(dt);
     obstacles_update(dt);
 
@@ -265,11 +267,17 @@ void game_state::update(float dt) {
             bonus_text.setString(bonus_text.getString() + "\nExtra life");
     }
 
-    if (bonuses[bonus::coin]) {
+    if (bonuses[bonus::coin] && coin_bonus_show_time - coin_bonus_timer.get_elapsed_seconds() > 0.01) {
         if (bonus_text.getString().isEmpty())
-            bonus_text.setString(bonus_text.getString() + "Coin");
+            bonus_text.setString(bonus_text.getString() + "+ 20 Coin");
         else
-            bonus_text.setString(bonus_text.getString() + "\nCoin");
+            bonus_text.setString(bonus_text.getString() + "\n+ 20 Coin");
+    } else if (bonuses[bonus::coin]) {
+        /* The message was shown for 3 seconds, so
+         * the bonus effect has ended */
+
+        coin_bonus_timer.pause();
+        bonuses[bonus::coin] = false;
     }
 
     obstacle* hit_obstacle = player_hit_obstacle(*this);
@@ -280,8 +288,12 @@ void game_state::update(float dt) {
         if (hit_obstacle->bonus()) {
             // Player got random bonus
             unsigned int r = rand() % bonus_count;
-
             bonuses[r] = true;
+
+            if (r == bonus::coin) {
+                score += 20;
+                coin_bonus_timer.restart();
+            }
 
             hit_obstacle->set_bonus(false);
             return;
