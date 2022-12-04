@@ -3,9 +3,7 @@
 #include "resources.hpp"
 
 namespace yapg {
-walls::walls(game_data_ptr _data) {
-    data = _data;
-
+walls::walls(game_data_ptr _data) : data(_data), move_speed(-200.0f) {
     data->assets.load_texture("Walls", WALLS_FILEPATH);
 
     sf::Sprite sprite;
@@ -19,8 +17,6 @@ walls::walls(game_data_ptr _data) {
                               0 - sprites.at(0).getGlobalBounds().height / 2);
     sprites.at(1).setPosition(0 + sprites.at(0).getGlobalBounds().width / 2,
                               0 - sprites.at(1).getGlobalBounds().height / 2);
-
-    move_speed = -200.0f;
 }
 
 void walls::move(float dt) {
@@ -31,10 +27,9 @@ void walls::move(float dt) {
             data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
             int j = (i + 1) % 2;
 
-            sprites.at(i).setPosition(sf::Vector2f(sprites.at(j).getGlobalBounds().left +
-                                                       sprites.at(j).getGlobalBounds().width +
-                                                       (move_speed * dt),
-                                                   sprites.at(i).getPosition().y));
+            sprites.at(i).setPosition(sprites.at(j).getGlobalBounds().left +
+                                          sprites.at(j).getGlobalBounds().width + (move_speed * dt),
+                                      sprites.at(i).getPosition().y);
         }
     }
 }

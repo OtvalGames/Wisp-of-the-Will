@@ -6,7 +6,7 @@
 
 namespace yapg {
 game_over_state::game_over_state(game_data_ptr _data, unsigned int _game_score, timer _game_timer)
-    : data(_data), game_score(_game_score), game_timer(_game_timer) {}
+    : data(_data), game_score(_game_score), game_timer(_game_timer), is_exit(false) {}
 
 void game_over_state::init() {
     // BG
@@ -55,8 +55,6 @@ void game_over_state::init() {
     stats_text.setPosition(
         bg.getPosition().x + bg.getGlobalBounds().width / 2 - stats_text.getGlobalBounds().width / 2,
         bg.getPosition().y + bg.getGlobalBounds().height / 3 - stats_text.getGlobalBounds().height);
-
-    is_exit = false;
 
     data->window.setMouseCursorVisible(true);
 }

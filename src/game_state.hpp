@@ -35,21 +35,14 @@ class game_state : public state {
     std::vector<obstacle> _obstacles;
 
     float object_spawn_interval;
-    float object_spawn_interval_decrease;
-    float object_spawn_interval_min;
     float last_object_spawn_time;
 
     float object_speed;
-    float object_speed_increase;
-    float object_speed_max;
 
-    float object_speed_increase_interval;
     float last_object_speed_increase_time;
-    float object_spawn_interval_decrease_interval;
     float last_object_spawn_interval_decrease_time;
 
     unsigned int score;
-    unsigned int score_increase;
     unsigned int max_score;
 
     sf::Text score_text;

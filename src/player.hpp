@@ -8,7 +8,7 @@ class player_ {
    public:
     player_(game_data_ptr _data);
 
-    void init(game_data_ptr _data);
+    void init();
     void draw();
     void handle_input(sf::Event event);
     void update(float dt);

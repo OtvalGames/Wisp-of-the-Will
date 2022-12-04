@@ -25,7 +25,8 @@ game::game() {
 }
 
 void game::run() {
-    float new_time, frame_time;
+    float new_time = 0;
+    float frame_time = 0;
     float current_time = clock.getElapsedTime().asSeconds();
     float accumulator = 0.0f;
 

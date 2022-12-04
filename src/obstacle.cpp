@@ -1,9 +1,8 @@
 #include "obstacle.hpp"
 
 namespace yapg {
-obstacle::obstacle(game_data_ptr _data) : data(_data), is_bonus(false), bonus_type(coin) {
-    is_active = false;
-}
+obstacle::obstacle(game_data_ptr _data)
+    : data(_data), is_active(false), is_bonus(false), bonus_type(coin) {}
 
 void obstacle::move(sf::Vector2f _offset) { sprite.move(_offset); }
 

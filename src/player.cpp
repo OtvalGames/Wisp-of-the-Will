@@ -6,11 +6,9 @@
 
 namespace yapg {
 
-player_::player_(game_data_ptr _data) { init(_data); }
+player_::player_(game_data_ptr _data) : data(_data), animation_iterator(0) { init(); }
 
-void player_::init(game_data_ptr _data) {
-    data = _data;
-
+void player_::init() {
     std::string animations_filepath = PLAYER_ANIM_CLASSIC_FILEPATH;
 
     std::ifstream current_skin_file(CURRENT_SKIN_FILEPATH);
@@ -32,10 +30,9 @@ void player_::init(game_data_ptr _data) {
         animations.push_back(texture);
     }
 
-    animation_iterator = 0;
-    sprite.setTexture(animations.at(0));
+    sprite.setTexture(animations.at(animation_iterator));
 
-    sprite.setScale(sf::Vector2f(3, 3));
+    sprite.setScale(3, 3);
     sprite.setOrigin(
         sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
 }

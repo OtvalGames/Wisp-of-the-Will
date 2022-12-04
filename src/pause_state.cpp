@@ -5,7 +5,7 @@
 
 namespace yapg {
 pause_state::pause_state(game_data_ptr _data, timer* _game_timer)
-    : data(_data), game_timer_ptr(_game_timer) {
+    : data(_data), game_timer_ptr(_game_timer), is_exit(false) {
     game_timer_ptr->pause();
 }
 
@@ -42,8 +42,6 @@ void pause_state::init() {
         ->setPosition(
             go_button->getPosition().x,
             go_button->getPosition().y + go_button->getGlobalBounds().height * menu_buttons_gap_mul);
-
-    is_exit = false;
 
     data->window.setMouseCursorVisible(true);
 }

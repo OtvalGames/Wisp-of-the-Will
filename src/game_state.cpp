@@ -6,8 +6,17 @@
 
 namespace yapg {
 constexpr int tile_size = 64;
+constexpr float object_speed_max = -900.0;
 
-game_state::game_state(game_data_ptr _data) : data(_data), player(_data) {}
+game_state::game_state(game_data_ptr _data)
+    : data(_data),
+      player(_data),
+      _walls(new walls(_data)),
+      object_spawn_interval(2.5f),
+      last_object_spawn_time(0.0f),
+      object_speed(-200.0f),
+      last_object_speed_increase_time(0.0f),
+      score(0) {}
 
 void game_state::init() {
     srand(time(NULL));
@@ -16,8 +25,6 @@ void game_state::init() {
     data->assets.load_texture("Bonus Coin", BONUS_COIN_FILEPATH);
     data->assets.load_texture("Bonus Skip", BONUS_SKIP_FILEPATH);
     data->assets.load_texture("Bonus Shield", BONUS_SHIELD_FILEPATH);
-
-    _walls = new walls(data);
 
     player.set_position(
         sf::Vector2f(player.get_position().x - data->window.getSize().x / 4, player.get_position().y));
@@ -62,22 +69,7 @@ void game_state::init() {
     lines[2].x = data->window.getView().getCenter().x + data->window.getView().getSize().x / 2.0f;
     lines[2].y = data->window.getView().getCenter().y + tile_size / 2;
 
-    object_spawn_interval = 2.5f;
-    object_spawn_interval_decrease = 0.1f;
-    object_spawn_interval_min = 0.5f;
-    last_object_spawn_time = 0.0f;
-
-    object_speed = -200.0f;
-    object_speed_increase = -5.0f;
-    object_speed_max = -900.0f;
-
-    object_speed_increase_interval = 0.4f;
-    last_object_speed_increase_time = 0.0f;
-    object_spawn_interval_decrease_interval = 5.0f;
     last_object_spawn_interval_decrease_time = 0.0f;
-
-    score = 0;
-    score_increase = 10;
     max_score = get_score_from_save();
 
     score_font.loadFromFile(FONT_IMPACT);
@@ -251,6 +243,15 @@ void game_state::max_score_save() {
 }
 
 void game_state::obstacles_update(float dt) {
+    constexpr float object_spawn_interval_decrease = 0.1;
+    constexpr float object_spawn_interval_min = 0.5;
+    constexpr float object_spawn_interval_decrease_interval = 5.0;
+
+    constexpr float object_speed_increase = -5.0;
+    constexpr float object_speed_increase_interval = 0.4;
+
+    constexpr int score_increase = 10;
+
     if (clock.get_elapsed_seconds() - last_object_spawn_time >= object_spawn_interval) {
         objects_spawn();
         last_object_spawn_time = clock.get_elapsed_seconds();
