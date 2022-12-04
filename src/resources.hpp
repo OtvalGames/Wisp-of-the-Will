@@ -7,6 +7,7 @@
 
 // Save
 #define MAX_SCORE_FILEPATH "res/save/max_score.txt"
+#define CURRENT_SKIN_FILEPATH "res/save/current_skin.txt"
 
 // Backgrounds
 #define SPLASH_BG_FILEPATH "res/images/og_logo.png"
