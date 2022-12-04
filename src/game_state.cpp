@@ -15,7 +15,7 @@ void game_state::init() {
     data->assets.load_texture("Obstacles", OBSTACLES_FILEPATH);
     data->assets.load_texture("Bonus Coin", BONUS_COIN_FILEPATH);
     data->assets.load_texture("Bonus Skip", BONUS_SKIP_FILEPATH);
-    data->assets.load_texture("Bonus Extra Life", BONUS_EXTRALIFE_FILEPATH);
+    data->assets.load_texture("Bonus Shield", BONUS_SHIELD_FILEPATH);
 
     _walls = new walls(data);
 
@@ -33,10 +33,10 @@ void game_state::init() {
 
     bonus_sprites.at(coin).setTexture(data->assets.get_texture("Bonus Coin"));
     bonus_sprites.at(skip).setTexture(data->assets.get_texture("Bonus Skip"));
-    bonus_sprites.at(extra_life).setTexture(data->assets.get_texture("Bonus Extra Life"));
+    bonus_sprites.at(shield).setTexture(data->assets.get_texture("Bonus Shield"));
 
     bonus_sprites.at(skip).setColor(sf::Color(196, 208, 233, 128));
-    bonus_sprites.at(extra_life).setColor(sf::Color(208, 210, 151, 128));
+    bonus_sprites.at(shield).setColor(sf::Color(208, 210, 151, 128));
 
     // All bonuses is disabled by default
     for (int i = 0; i < bonus_count; i++) bonuses[i] = false;
@@ -208,8 +208,8 @@ void game_state::objects_spawn() {
             case skip:
                 text_name += " Skip";
                 break;
-            case extra_life:
-                text_name += " Extra Life";
+            case shield:
+                text_name += " Shield";
                 break;
             default:
                 // case coin:
@@ -361,10 +361,10 @@ void game_state::update(float dt) {
             return;
         }
 
-        if (bonuses[extra_life]) {
+        if (bonuses[shield]) {
             // Player had extra life bonus
 
-            bonuses[extra_life] = false;
+            bonuses[shield] = false;
         } else {
             // Player died
 
