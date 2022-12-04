@@ -34,7 +34,9 @@
 #define PLAYER_SKIN_PREVIEW_FIRE_FILEPATH "res/images/player_skin_preview_fire.png"
 #define WALLS_FILEPATH "res/images/walls.png"
 #define OBSTACLES_FILEPATH "res/images/obstacles.png"
-#define BONUS_FILEPATH "res/images/bonus.png"
+#define BONUS_COIN_FILEPATH "res/images/bonus_coin.png"
+#define BONUS_SHIELD_FILEPATH "res/images/bonus_shield.png"
+#define BONUS_EXTRALIFE_FILEPATH "res/images/bonus_skip.png"
 
 // Properties
 constexpr int player_sprite_size = 16;

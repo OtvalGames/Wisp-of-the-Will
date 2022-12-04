@@ -1,7 +1,7 @@
 #include "obstacle.hpp"
 
 namespace yapg {
-obstacle::obstacle(game_data_ptr _data) : data(_data), is_bonus(false) { is_active = false; }
+obstacle::obstacle(game_data_ptr _data) : data(_data), is_bonus(false), bonus_type(coin) { is_active = false; }
 
 void obstacle::move(sf::Vector2f _offset) { sprite.move(_offset); }
 
@@ -26,6 +26,8 @@ void obstacle::disable() { is_active = false; }
 void obstacle::set_bonus(bool b) { is_bonus = b; }
 
 bool obstacle::bonus() { return is_bonus; }
+
+void obstacle::set_bonus_type(enum bonus_type bt) { bonus_type = bt; }
 
 bool obstacle::active() { return is_active; }
 

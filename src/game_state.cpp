@@ -13,7 +13,9 @@ void game_state::init() {
     srand(time(NULL));
 
     data->assets.load_texture("Obstacles", OBSTACLES_FILEPATH);
-    data->assets.load_texture("Bonus", BONUS_FILEPATH);
+    data->assets.load_texture("Bonus Coin", BONUS_COIN_FILEPATH);
+    data->assets.load_texture("Bonus Shield", BONUS_SHIELD_FILEPATH);
+    data->assets.load_texture("Bonus Extra Life", BONUS_EXTRALIFE_FILEPATH);
 
     _walls = new walls(data);
 
@@ -181,7 +183,25 @@ void game_state::objects_spawn() {
         tmp.set_bonus(true);
         tmp.set_position(lines[1]);
 
-        tmp.set_texture(data->assets.get_texture("Bonus"));
+        unsigned int r = rand() % bonus_count;
+        tmp.set_bonus_type(static_cast<enum bonus_type>(r));
+
+        std::string text_name("Bonus");
+
+        switch (r) {
+            case shield:
+                text_name += " Shield";
+                break;
+            case extra_life:
+                text_name += " Extra Life";
+                break;
+            default:
+                // case coin:
+                text_name += " Coin";
+                break;
+        }
+
+        tmp.set_texture(data->assets.get_texture(text_name));
         tmp.set_texture_rect(sf::IntRect(0, 0, tile_size, tile_size));
     }
 }
@@ -258,7 +278,7 @@ void game_state::update(float dt) {
     obstacle* hit_obstacle = player_hit_obstacle(*this);
 
     // Apply shield bonus
-    if (bonuses[bonus::shield]) {
+    if (bonuses[shield]) {
         // NULL means player does not hit any obstacles
         hit_obstacle = NULL;
 
@@ -280,7 +300,7 @@ void game_state::update(float dt) {
             // End shield bonus
 
             shield_bonus_timer.pause();
-            bonuses[bonus::shield] = false;
+            bonuses[shield] = false;
         }
 
         bonus_text.setString("Shield");
@@ -288,7 +308,7 @@ void game_state::update(float dt) {
     else bonus_text.setString("");
 
     // Apply extra life bonus
-    if (bonuses[bonus::extra_life]) {
+    if (bonuses[extra_life]) {
         if (bonus_text.getString().isEmpty())
             bonus_text.setString(bonus_text.getString() + "Extra life");
         else
@@ -296,33 +316,33 @@ void game_state::update(float dt) {
     }
 
     // Apply coin bonus
-    if (bonuses[bonus::coin] && coin_bonus_show_time - coin_bonus_timer.get_elapsed_seconds() > 0.01) {
+    if (bonuses[coin] && coin_bonus_show_time - coin_bonus_timer.get_elapsed_seconds() > 0.01) {
         if (bonus_text.getString().isEmpty())
             bonus_text.setString(bonus_text.getString() + "+ 20 Score");
         else
             bonus_text.setString(bonus_text.getString() + "\n+ 20 Score");
-    } else if (bonuses[bonus::coin]) {
+    } else if (bonuses[coin]) {
         /* The message was shown for 3 seconds, so
          * the bonus effect has ended */
 
+        score += 20;
         coin_bonus_timer.pause();
-        bonuses[bonus::coin] = false;
+        bonuses[coin] = false;
     }
 
     if (hit_obstacle) {
         // Player hit an obstacle
 
         if (hit_obstacle->bonus()) {
-            // Player got random bonus
-            unsigned int r = rand() % bonus_count;
+            // Player got bonus
+            enum bonus_type bt = hit_obstacle->bonus_type;
 
-            bonuses[r] = true;
+            bonuses[bt] = true;
 
-            if (r == bonus::coin) {
-                score += 20;
+            if (bt == coin) {
                 coin_bonus_timer.restart();
             }
-            else if (r == bonus::shield) {
+            else if (bt == shield) {
                 shield_object_speed_before = object_speed;
 
                 shield_bonus_timer.restart();
@@ -332,10 +352,10 @@ void game_state::update(float dt) {
             return;
         }
 
-        if (bonuses[bonus::extra_life]) {
+        if (bonuses[extra_life]) {
             // Player had extra life bonus
 
-            bonuses[bonus::extra_life] = false;
+            bonuses[extra_life] = false;
         } else {
             // Player died
 
