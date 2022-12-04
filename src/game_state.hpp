@@ -45,6 +45,7 @@ class game_state : public state {
     unsigned int score_increase;
     unsigned int max_score;
 
+    sf::Text bonus_text;
     sf::Text score_text;
     sf::Font score_font;
 

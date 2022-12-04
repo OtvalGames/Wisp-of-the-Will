@@ -70,10 +70,12 @@ void game_state::init() {
                            sf::Vector2f(10, 10));
     score_text.setString("Score: 0");
 
-    data->window.setMouseCursorVisible(false);
+    bonus_text.setFont(*score_text.getFont());
+    bonus_text.setCharacterSize(score_text.getCharacterSize());
+    bonus_text.setPosition(score_text.getPosition().x,
+                           score_text.getPosition().y + score_text.getGlobalBounds().height * menu_buttons_gap_mul);
 
-    // TEMPORARY
-    bonuses[bonus::extra_life] = true;
+    data->window.setMouseCursorVisible(false);
 }
 
 void game_state::handle_input() {
@@ -180,6 +182,7 @@ void game_state::objects_spawn() {
         tmp.set_position(lines[1]);
 
         tmp.set_texture(data->assets.get_texture("Bonus"));
+        tmp.set_texture_rect(sf::IntRect(0, 0, tile_size, tile_size));
     }
 }
 
@@ -211,7 +214,10 @@ void game_state::obstacles_update(float dt) {
     }
 
     for (obstacle& obstacle : _obstacles) {
-        if (!obstacle.active()) continue;
+        if (!obstacle.active()) {
+            obstacle.set_bonus(false);
+            continue;
+        }
 
         obstacle.move(sf::Vector2f(1, 0) * (object_speed * dt));
 
@@ -245,6 +251,26 @@ obstacle* player_hit_obstacle(game_state& gs) {
 void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
+
+    // Set bonus text
+    if (bonuses[bonus::shield])
+        bonus_text.setString("Shield");
+    else
+        bonus_text.setString("");
+
+    if (bonuses[bonus::extra_life]) {
+        if (bonus_text.getString().isEmpty())
+            bonus_text.setString(bonus_text.getString() + "Extra life");
+        else
+            bonus_text.setString(bonus_text.getString() + "\nExtra life");
+    }
+
+    if (bonuses[bonus::coin]) {
+        if (bonus_text.getString().isEmpty())
+            bonus_text.setString(bonus_text.getString() + "Coin");
+        else
+            bonus_text.setString(bonus_text.getString() + "\nCoin");
+    }
 
     obstacle* hit_obstacle = player_hit_obstacle(*this);
 
@@ -284,6 +310,7 @@ void game_state::draw(float dt) {
 
     player.draw();
     data->window.draw(score_text);
+    data->window.draw(bonus_text);
 
     data->window.display();
 }
