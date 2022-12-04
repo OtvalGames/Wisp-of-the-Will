@@ -21,7 +21,11 @@ class game_state : public state {
     player_ player;
 
     bool bonuses[3];
+
     timer coin_bonus_timer;
+
+    timer shield_bonus_timer;
+    float shield_object_speed_before;
 
     walls* _walls;
 
