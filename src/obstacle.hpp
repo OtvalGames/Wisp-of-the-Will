@@ -6,7 +6,7 @@
 #include "game.hpp"
 
 namespace yapg {
-enum bonus_type { coin = 0, shield, extra_life};
+enum bonus { coin = 0, shield, extra_life};
 
 class obstacle {
    public:
@@ -32,8 +32,8 @@ class obstacle {
     void set_bonus(bool b);
     bool bonus();
 
-    void set_bonus_type(enum bonus_type bt);
-    enum bonus_type bonus_type;
+    void set_bonus_type(enum bonus bt);
+    enum bonus bonus_type;
 
    private:
     game_data_ptr data;

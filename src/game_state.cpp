@@ -184,7 +184,7 @@ void game_state::objects_spawn() {
         tmp.set_position(lines[1]);
 
         unsigned int r = rand() % bonus_count;
-        tmp.set_bonus_type(static_cast<enum bonus_type>(r));
+        tmp.set_bonus_type(static_cast<enum bonus>(r));
 
         std::string text_name("Bonus");
 
@@ -335,7 +335,7 @@ void game_state::update(float dt) {
 
         if (hit_obstacle->bonus()) {
             // Player got bonus
-            enum bonus_type bt = hit_obstacle->bonus_type;
+            enum bonus bt = hit_obstacle->bonus_type;
 
             bonuses[bt] = true;
 
