@@ -1,8 +1,8 @@
 #ifndef MAIN_MENU_STATE_HPP
 #define MAIN_MENU_STATE_HPP
 
-#include <map>
 #include <SFML/Audio/Music.hpp>
+#include <map>
 
 #include "game.hpp"
 #include "state.hpp"
@@ -46,6 +46,7 @@ class main_menu_state : public state {
     void handle_input();
     void update(float dt);
     void draw(float dt);
+    void close();
 };
 }  // namespace yapg
 

@@ -30,6 +30,7 @@ class pause_state : public state {
     void handle_input();
     void update(float dt);
     void draw(float dt);
+    void close();
 };
 }  // namespace yapg
 

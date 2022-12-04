@@ -111,7 +111,6 @@ void game_state::handle_input() {
     while (data->window.pollEvent(e)) {
         if (e.type == sf::Event::Closed) {
             max_score_save();
-            music.stop();
             data->window.close();
         }
 
@@ -120,8 +119,10 @@ void game_state::handle_input() {
 
             float new_volume = music.getVolume() + e.mouseWheelScroll.delta;
 
-            if (new_volume - 100 > 0.01) new_volume = 100;
-            else if (new_volume < 0.01) new_volume = 0;
+            if (new_volume - 100 > 0.01)
+                new_volume = 100;
+            else if (new_volume < 0.01)
+                new_volume = 0;
 
             music.setVolume(new_volume);
         }
@@ -389,7 +390,6 @@ void game_state::update(float dt) {
             // Player died
 
             max_score_save();
-            music.stop();
             data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
         }
     }
@@ -413,4 +413,6 @@ void game_state::draw(float dt) {
 
     data->window.display();
 }
+
+void game_state::close() { music.stop(); }
 }  // namespace yapg

@@ -138,29 +138,26 @@ void main_menu_state::handle_input() {
     sf::Event e;
 
     while (data->window.pollEvent(e)) {
-        if (e.type == sf::Event::Closed) {
-            music.stop();
-            data->window.close();
-        }
+        if (e.type == sf::Event::Closed) data->window.close();
 
         if (e.type == sf::Event::MouseWheelScrolled) {
             // Change music volume by scrolling mouse wheel
 
             float new_volume = music.getVolume() + e.mouseWheelScroll.delta;
 
-            if (new_volume - 100 > 0.01) new_volume = 100;
-            else if (new_volume < 0.01) new_volume = 0;
+            if (new_volume - 100 > 0.01)
+                new_volume = 100;
+            else if (new_volume < 0.01)
+                new_volume = 0;
 
             music.setVolume(new_volume);
         }
 
         if (is_clicked(*buttons.at(buttons::play), sf::Mouse::Left, data->window)) {
             // Play button clicked
-            music.stop();
             data->machine.replace_state(state_ptr(new game_state(data)));
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
             // Exit button clicked
-            music.stop();
             data->window.close();
         } else if (is_clicked(arrows.at(arrows::left), sf::Mouse::Left, data->window)) {
             current_skin_id--;
@@ -184,7 +181,7 @@ void main_menu_state::handle_input() {
     }
 }
 
-void main_menu_state::update(float dt) { }
+void main_menu_state::update(float dt) {}
 
 void main_menu_state::draw(float dt) {
     data->window.clear();
@@ -201,4 +198,6 @@ void main_menu_state::draw(float dt) {
 
     data->window.display();
 }
+
+void main_menu_state::close() { music.stop(); }
 }  // namespace yapg

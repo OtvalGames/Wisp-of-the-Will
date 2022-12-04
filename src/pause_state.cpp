@@ -120,4 +120,6 @@ void pause_state::draw(float dt) {
 
     data->window.display();
 }
+
+void pause_state::close() {}
 }  // namespace yapg

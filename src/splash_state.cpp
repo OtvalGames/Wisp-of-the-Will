@@ -54,4 +54,6 @@ void splash_state::draw(float dt) {
 
     data->window.display();
 }
+
+void splash_state::close() {}
 }  // namespace yapg
