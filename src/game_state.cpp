@@ -209,13 +209,15 @@ void game_state::obstacles_update(float dt) {
         if (obstacle.get_global_bounds().left + obstacle.get_global_bounds().width <
             data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
             obstacle.disable();
+            obstacle.set_bonus(false);
+
             score += score_increase;
             score_text.setString("Score: " + std::to_string(score));
         }
     }
 }
 
-bool is_player_hit_obstacle(game_state& gs) {
+obstacle* player_hit_obstacle(game_state& gs) {
     sf::Sprite player_sprite = gs.player.get_sprite();
 
     for (obstacle& obstacle : gs._obstacles) {
@@ -223,24 +225,38 @@ bool is_player_hit_obstacle(game_state& gs) {
 
         if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) {
             obstacle.disable();
-            return true;
+            obstacle.set_bonus(false);
+
+            return &obstacle;
         }
     }
 
-    return false;
+    return NULL;
 }
 
 void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
 
-    if (is_player_hit_obstacle(*this)) {
+    obstacle* hit_obstacle = player_hit_obstacle(*this);
+
+    if (hit_obstacle) {
+        // Player hit an obstacle
+
+        if (hit_obstacle->bonus()) {
+            // Player got random bonus
+            // Randomize value
+
+            hit_obstacle->set_bonus(false);
+            return;
+        }
+
         if (bonuses[bonus::extra_life]) {
-            // Player hit an obstacle, but had extra life bonus
+            // Player had extra life bonus
 
             bonuses[bonus::extra_life] = false;
         } else {
-            // Player hit an obstacle and died
+            // Player died
 
             max_score_save();
             data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));

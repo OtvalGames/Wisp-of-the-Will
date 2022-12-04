@@ -56,7 +56,7 @@ class game_state : public state {
 
     void max_score_save();
 
-    friend bool is_player_hit_obstacle(game_state& gs);
+    friend obstacle* player_hit_obstacle(game_state& gs);
 
    public:
     game_state(game_data_ptr _data);
