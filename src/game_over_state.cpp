@@ -57,6 +57,8 @@ void game_over_state::init() {
         bg.getPosition().y + bg.getGlobalBounds().height / 3 - stats_text.getGlobalBounds().height);
 
     is_exit = false;
+
+    data->window.setMouseCursorVisible(true);
 }
 
 void game_over_state::handle_input() {

@@ -65,6 +65,8 @@ void game_state::init() {
     score_text.setPosition(data->window.getView().getCenter() - data->window.getView().getSize() / 2.0f +
                            sf::Vector2f(10, 10));
     score_text.setString("Score: 0");
+
+    data->window.setMouseCursorVisible(false);
 }
 
 void game_state::handle_input() {

@@ -44,6 +44,8 @@ void pause_state::init() {
             go_button->getPosition().y + go_button->getGlobalBounds().height * menu_buttons_gap_mul);
 
     is_exit = false;
+
+    data->window.setMouseCursorVisible(true);
 }
 
 void pause_state::handle_input() {
@@ -55,6 +57,7 @@ void pause_state::handle_input() {
         if (e.type == sf::Event::KeyPressed)
             if (e.key.code == sf::Keyboard::Escape) {
                 game_timer_ptr->start();
+                data->window.setMouseCursorVisible(false);
                 data->machine.remove_state();
                 break;
             }
@@ -62,6 +65,8 @@ void pause_state::handle_input() {
         if (is_clicked(*buttons.at(buttons::go), sf::Mouse::Left, data->window)) {
             // Go button clicked
             game_timer_ptr->start();
+
+            data->window.setMouseCursorVisible(false);
 
             data->machine.remove_state();
         } else if (is_clicked(*buttons.at(buttons::exit), sf::Mouse::Left, data->window)) {
