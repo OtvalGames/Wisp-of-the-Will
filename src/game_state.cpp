@@ -335,7 +335,7 @@ void game_state::update(float dt) {
 
         if (hit_obstacle->bonus()) {
             // Player got bonus
-            enum bonus bt = hit_obstacle->bonus_type;
+            enum bonus bt = hit_obstacle->get_bonus_type();
 
             bonuses[bt] = true;
 

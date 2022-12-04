@@ -6,6 +6,7 @@
 #include "game.hpp"
 
 namespace yapg {
+constexpr int bonus_count = 3;
 enum bonus { coin = 0, shield, extra_life};
 
 class obstacle {
@@ -33,7 +34,7 @@ class obstacle {
     bool bonus();
 
     void set_bonus_type(enum bonus bt);
-    enum bonus bonus_type;
+    enum bonus get_bonus_type();
 
    private:
     game_data_ptr data;
@@ -41,7 +42,9 @@ class obstacle {
     sf::Sprite sprite;
 
     bool is_active;
+
     bool is_bonus;
+    enum bonus bonus_type;
 };
 }  // namespace yapg
 

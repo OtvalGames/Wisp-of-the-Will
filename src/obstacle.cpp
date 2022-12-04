@@ -27,7 +27,9 @@ void obstacle::set_bonus(bool b) { is_bonus = b; }
 
 bool obstacle::bonus() { return is_bonus; }
 
-void obstacle::set_bonus_type(enum bonus_type bt) { bonus_type = bt; }
+void obstacle::set_bonus_type(enum bonus bt) { bonus_type = bt; }
+
+enum bonus obstacle::get_bonus_type() { return bonus_type; }
 
 bool obstacle::active() { return is_active; }
 

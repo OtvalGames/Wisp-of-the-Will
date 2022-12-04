@@ -9,8 +9,6 @@
 #include "walls.hpp"
 
 namespace yapg {
-constexpr int bonus_count = 3;
-
 class game_state : public state {
    private:
     game_data_ptr data;
