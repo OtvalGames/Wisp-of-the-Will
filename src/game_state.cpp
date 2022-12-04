@@ -90,8 +90,9 @@ void game_state::init() {
 
     bonus_text.setFont(*score_text.getFont());
     bonus_text.setCharacterSize(score_text.getCharacterSize());
-    bonus_text.setPosition(score_text.getPosition().x,
-                           score_text.getPosition().y + score_text.getGlobalBounds().height * menu_buttons_gap_mul);
+    bonus_text.setPosition(
+        score_text.getPosition().x,
+        score_text.getPosition().y + score_text.getGlobalBounds().height * menu_buttons_gap_mul);
 
     data->window.setMouseCursorVisible(false);
 }
@@ -311,15 +312,13 @@ void game_state::update(float dt) {
              * skip all obstacles */
 
             object_speed = object_speed_max * 2;
-        }
-        else if (shield_bonus_time - shield_bonus_timer.get_elapsed_seconds() > 0.01) {
+        } else if (shield_bonus_time - shield_bonus_timer.get_elapsed_seconds() > 0.01) {
             /* Before-end state of shield bonus:
              * restore old move speed
              * skip all obstacles */
 
             object_speed = shield_object_speed_before;
-        }
-        else {
+        } else {
             // End shield bonus
 
             shield_bonus_timer.pause();
@@ -352,8 +351,7 @@ void game_state::update(float dt) {
             if (bt == coin) {
                 score += 20;
                 coin_bonus_timer.restart();
-            }
-            else if (bt == skip) {
+            } else if (bt == skip) {
                 shield_object_speed_before = object_speed;
 
                 shield_bonus_timer.restart();
