@@ -27,6 +27,10 @@
 #define PLAYER_ANIM_OUTLINE_FILEPATH "res/images/player_anim_outline.png"
 #define PLAYER_ANIM_SHARPEN_FILEPATH "res/images/player_anim_sharpen.png"
 #define PLAYER_ANIM_FIRE_FILEPATH "res/images/player_anim_fire.png"
+#define PLAYER_SKIN_PREVIEW_CLASSIC_FILEPATH "res/images/player_skin_preview_classic.png"
+#define PLAYER_SKIN_PREVIEW_OUTLINE_FILEPATH "res/images/player_skin_preview_outline.png"
+#define PLAYER_SKIN_PREVIEW_SHARPEN_FILEPATH "res/images/player_skin_preview_sharpen.png"
+#define PLAYER_SKIN_PREVIEW_FIRE_FILEPATH "res/images/player_skin_preview_fire.png"
 #define WALLS_FILEPATH "res/images/walls.png"
 #define OBSTACLES_FILEPATH "res/images/obstacles.png"
 
