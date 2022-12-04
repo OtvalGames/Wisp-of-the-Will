@@ -14,7 +14,7 @@ void game_state::init() {
 
     data->assets.load_texture("Obstacles", OBSTACLES_FILEPATH);
     data->assets.load_texture("Bonus Coin", BONUS_COIN_FILEPATH);
-    data->assets.load_texture("Bonus Shield", BONUS_SHIELD_FILEPATH);
+    data->assets.load_texture("Bonus Skip", BONUS_SKIP_FILEPATH);
     data->assets.load_texture("Bonus Extra Life", BONUS_EXTRALIFE_FILEPATH);
 
     _walls = new walls(data);
@@ -32,10 +32,10 @@ void game_state::init() {
     }
 
     bonus_sprites.at(coin).setTexture(data->assets.get_texture("Bonus Coin"));
-    bonus_sprites.at(shield).setTexture(data->assets.get_texture("Bonus Shield"));
+    bonus_sprites.at(skip).setTexture(data->assets.get_texture("Bonus Skip"));
     bonus_sprites.at(extra_life).setTexture(data->assets.get_texture("Bonus Extra Life"));
 
-    bonus_sprites.at(shield).setColor(sf::Color(196, 208, 233, 128));
+    bonus_sprites.at(skip).setColor(sf::Color(196, 208, 233, 128));
     bonus_sprites.at(extra_life).setColor(sf::Color(208, 210, 151, 128));
 
     // All bonuses is disabled by default
@@ -205,8 +205,8 @@ void game_state::objects_spawn() {
         std::string text_name("Bonus");
 
         switch (r) {
-            case shield:
-                text_name += " Shield";
+            case skip:
+                text_name += " Skip";
                 break;
             case extra_life:
                 text_name += " Extra Life";
@@ -299,7 +299,7 @@ void game_state::update(float dt) {
     obstacle* hit_obstacle = player_hit_obstacle(*this);
 
     // Apply shield bonus
-    if (bonuses[shield]) {
+    if (bonuses[skip]) {
         // NULL means player does not hit any obstacles
         hit_obstacle = NULL;
 
@@ -321,7 +321,7 @@ void game_state::update(float dt) {
             // End shield bonus
 
             shield_bonus_timer.pause();
-            bonuses[shield] = false;
+            bonuses[skip] = false;
         }
     }
 
@@ -351,7 +351,7 @@ void game_state::update(float dt) {
                 score += 20;
                 coin_bonus_timer.restart();
             }
-            else if (bt == shield) {
+            else if (bt == skip) {
                 shield_object_speed_before = object_speed;
 
                 shield_bonus_timer.restart();
