@@ -106,13 +106,15 @@ void game_state::handle_input() {
         }
 
         if (e.type == sf::Event::KeyPressed) {
-            if (e.key.code == sf::Keyboard::Escape) {
+            typedef sf::Keyboard kb;
+
+            if (e.key.code == kb::Escape) {
                 max_score_save();
                 data->machine.add_state(state_ptr(new pause_state(data, &clock)));
-            } else if (e.key.code == sf::Keyboard::W) {
+            } else if (e.key.code == kb::W || e.key.code == kb::Z) {
                 // Move 1 line up
                 if (player.get_position().y >= 0) player.get_sprite().move(0, 0 - tile_size);
-            } else if (e.key.code == sf::Keyboard::S) {
+            } else if (e.key.code == kb::S || e.key.code == kb::X) {
                 // Move 1 line down
                 if (player.get_position().y <= 0) player.get_sprite().move(0, tile_size);
             }
