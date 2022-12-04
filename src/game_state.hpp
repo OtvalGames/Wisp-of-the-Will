@@ -1,6 +1,8 @@
 #ifndef GAME_STATE_HPP
 #define GAME_STATE_HPP
 
+#include <SFML/Audio/Music.hpp>
+
 #include "game.hpp"
 #include "obstacle.hpp"
 #include "player.hpp"
@@ -12,6 +14,7 @@ namespace yapg {
 class game_state : public state {
    private:
     game_data_ptr data;
+    sf::Music music;
     timer clock;
 
     player_ player;

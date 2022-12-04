@@ -95,6 +95,14 @@ void game_state::init() {
         score_text.getPosition().y + score_text.getGlobalBounds().height * menu_buttons_gap_mul);
 
     data->window.setMouseCursorVisible(false);
+
+    // Soundtrack
+    constexpr float default_volume = 25;
+
+    music.setLoop(true);
+    music.setVolume(default_volume);
+
+    if (music.openFromFile(OST_HM_HYDROGEN_FILEPATH)) music.play();
 }
 
 void game_state::handle_input() {
@@ -103,7 +111,19 @@ void game_state::handle_input() {
     while (data->window.pollEvent(e)) {
         if (e.type == sf::Event::Closed) {
             max_score_save();
+            music.stop();
             data->window.close();
+        }
+
+        if (e.type == sf::Event::MouseWheelScrolled) {
+            // Change music volume by scrolling mouse wheel
+
+            float new_volume = music.getVolume() + e.mouseWheelScroll.delta;
+
+            if (new_volume - 100 > 0.01) new_volume = 100;
+            else if (new_volume < 0.01) new_volume = 0;
+
+            music.setVolume(new_volume);
         }
 
         if (e.type == sf::Event::KeyPressed) {
@@ -369,6 +389,7 @@ void game_state::update(float dt) {
             // Player died
 
             max_score_save();
+            music.stop();
             data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
         }
     }

@@ -40,6 +40,7 @@
 
 // OST
 #define OST_HM_DUST_FILEPATH "res/audio/Dust.ogg"
+#define OST_HM_HYDROGEN_FILEPATH "res/audio/Hydrogen.ogg"
 
 // Properties
 constexpr int player_sprite_size = 16;

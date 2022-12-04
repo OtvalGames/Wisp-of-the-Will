@@ -1,0 +1,1 @@
+res/images/player_anim_fire.png 3
