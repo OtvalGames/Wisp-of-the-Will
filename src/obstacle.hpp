@@ -27,12 +27,16 @@ class obstacle {
     void disable();
     bool active();
 
+    void set_bonus(bool b);
+    bool bonus();
+
    private:
     game_data_ptr data;
 
     sf::Sprite sprite;
 
     bool is_active;
+    bool is_bonus;
 };
 }  // namespace yapg
 
