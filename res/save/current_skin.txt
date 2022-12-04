@@ -1,1 +1,1 @@
-res/images/player_anim_outline.png 1
+res/images/player_anim_classic.png 0
