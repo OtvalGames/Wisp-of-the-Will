@@ -22,6 +22,22 @@ void game_state::init() {
     player.set_position(
         sf::Vector2f(player.get_position().x - data->window.getSize().x / 4, player.get_position().y));
 
+    for (int i = 0; i < bonus_count; i++) {
+        // Create bonus sprites
+
+        sf::Sprite s;
+        s.setOrigin(player.get_sprite().getOrigin());
+
+        bonus_sprites.push_back(s);
+    }
+
+    bonus_sprites.at(coin).setTexture(data->assets.get_texture("Bonus Coin"));
+    bonus_sprites.at(shield).setTexture(data->assets.get_texture("Bonus Shield"));
+    bonus_sprites.at(extra_life).setTexture(data->assets.get_texture("Bonus Extra Life"));
+
+    bonus_sprites.at(shield).setColor(sf::Color(196, 208, 233, 128));
+    bonus_sprites.at(extra_life).setColor(sf::Color(208, 210, 151, 128));
+
     // All bonuses is disabled by default
     for (int i = 0; i < bonus_count; i++) bonuses[i] = false;
 
@@ -275,6 +291,11 @@ void game_state::update(float dt) {
     _walls->move(dt);
     obstacles_update(dt);
 
+    for (sf::Sprite& sprite : bonus_sprites) {
+        sprite.setPosition(player.get_position().x - player.get_sprite().getGlobalBounds().width / 2,
+                           player.get_position().y - player.get_sprite().getGlobalBounds().height / 2);
+    }
+
     obstacle* hit_obstacle = player_hit_obstacle(*this);
 
     // Apply shield bonus
@@ -302,25 +323,13 @@ void game_state::update(float dt) {
             shield_bonus_timer.pause();
             bonuses[shield] = false;
         }
-
-        bonus_text.setString("Shield");
-    }
-    else bonus_text.setString("");
-
-    // Apply extra life bonus
-    if (bonuses[extra_life]) {
-        if (bonus_text.getString().isEmpty())
-            bonus_text.setString(bonus_text.getString() + "Extra life");
-        else
-            bonus_text.setString(bonus_text.getString() + "\nExtra life");
     }
 
-    // Apply coin bonus
+    bonus_text.setString("");
+
+    // Show coin bonus message
     if (bonuses[coin] && coin_bonus_show_time - coin_bonus_timer.get_elapsed_seconds() > 0.01) {
-        if (bonus_text.getString().isEmpty())
-            bonus_text.setString(bonus_text.getString() + "+ 20 Score");
-        else
-            bonus_text.setString(bonus_text.getString() + "\n+ 20 Score");
+        bonus_text.setString("+ 20 Score");
     } else if (bonuses[coin]) {
         /* The message was shown for 3 seconds, so
          * the bonus effect has ended */
@@ -376,6 +385,10 @@ void game_state::draw(float dt) {
     player.draw();
     data->window.draw(score_text);
     data->window.draw(bonus_text);
+
+    for (int i = 1; i < bonus_count; i++) {
+        if (bonuses[i]) data->window.draw(bonus_sprites.at(i));
+    }
 
     data->window.display();
 }

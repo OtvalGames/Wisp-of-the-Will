@@ -17,6 +17,8 @@ class game_state : public state {
     player_ player;
 
     bool bonuses[bonus_count];
+    sf::Text bonus_text;
+    std::deque<sf::Sprite> bonus_sprites;
 
     timer coin_bonus_timer;
 
@@ -47,11 +49,9 @@ class game_state : public state {
     unsigned int score_increase;
     unsigned int max_score;
 
-    sf::Text bonus_text;
     sf::Text score_text;
     sf::Font score_font;
 
-   private:
     void obstacles_update(float dt);
     void objects_spawn();
     obstacle& get_free_obstacle(std::vector<obstacle>& arr);
