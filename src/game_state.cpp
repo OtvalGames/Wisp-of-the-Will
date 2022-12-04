@@ -13,6 +13,7 @@ void game_state::init() {
     srand(time(NULL));
 
     data->assets.load_texture("Obstacles", OBSTACLES_FILEPATH);
+    data->assets.load_texture("Bonus", BONUS_FILEPATH);
 
     _walls = new walls(data);
 
@@ -170,7 +171,15 @@ void game_state::objects_spawn() {
         tmp2.set_position(lines[2]);
         set_rand_obstacle_texture(tmp2);
     } else {
-        // TODO: Spawn bonus
+        // Spawn bonus
+
+        obstacle& tmp = get_free_obstacle(_obstacles);
+
+        tmp.activate();
+        tmp.set_bonus(true);
+        tmp.set_position(lines[1]);
+
+        tmp.set_texture(data->assets.get_texture("Bonus"));
     }
 }
 
@@ -225,7 +234,6 @@ obstacle* player_hit_obstacle(game_state& gs) {
 
         if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) {
             obstacle.disable();
-            obstacle.set_bonus(false);
 
             return &obstacle;
         }
@@ -245,7 +253,9 @@ void game_state::update(float dt) {
 
         if (hit_obstacle->bonus()) {
             // Player got random bonus
-            // Randomize value
+            unsigned int r = rand() % bonus_count;
+
+            bonuses[r] = true;
 
             hit_obstacle->set_bonus(false);
             return;
