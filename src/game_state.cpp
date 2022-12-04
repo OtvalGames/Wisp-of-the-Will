@@ -13,11 +13,33 @@ void game_state::init() {
     srand(time(NULL));
 
     data->assets.load_texture("Obstacles", OBSTACLES_FILEPATH);
+    data->assets.load_texture("Bonus Coin", BONUS_COIN_FILEPATH);
+    data->assets.load_texture("Bonus Skip", BONUS_SKIP_FILEPATH);
+    data->assets.load_texture("Bonus Shield", BONUS_SHIELD_FILEPATH);
 
     _walls = new walls(data);
 
     player.set_position(
         sf::Vector2f(player.get_position().x - data->window.getSize().x / 4, player.get_position().y));
+
+    for (int i = 0; i < bonus_count; i++) {
+        // Create bonus sprites
+
+        sf::Sprite s;
+        s.setOrigin(player.get_sprite().getOrigin());
+
+        bonus_sprites.push_back(s);
+    }
+
+    bonus_sprites.at(coin).setTexture(data->assets.get_texture("Bonus Coin"));
+    bonus_sprites.at(skip).setTexture(data->assets.get_texture("Bonus Skip"));
+    bonus_sprites.at(shield).setTexture(data->assets.get_texture("Bonus Shield"));
+
+    bonus_sprites.at(skip).setColor(sf::Color(196, 208, 233, 128));
+    bonus_sprites.at(shield).setColor(sf::Color(208, 210, 151, 128));
+
+    // All bonuses is disabled by default
+    for (int i = 0; i < bonus_count; i++) bonuses[i] = false;
 
     constexpr int obstacles_pool_count = 20;
 
@@ -65,6 +87,11 @@ void game_state::init() {
     score_text.setPosition(data->window.getView().getCenter() - data->window.getView().getSize() / 2.0f +
                            sf::Vector2f(10, 10));
     score_text.setString("Score: 0");
+
+    bonus_text.setFont(*score_text.getFont());
+    bonus_text.setCharacterSize(score_text.getCharacterSize());
+    bonus_text.setPosition(score_text.getPosition().x,
+                           score_text.getPosition().y + score_text.getGlobalBounds().height * menu_buttons_gap_mul);
 
     data->window.setMouseCursorVisible(false);
 }
@@ -164,7 +191,34 @@ void game_state::objects_spawn() {
         tmp2.set_position(lines[2]);
         set_rand_obstacle_texture(tmp2);
     } else {
-        // TODO: Spawn bonus
+        // Spawn bonus
+
+        obstacle& tmp = get_free_obstacle(_obstacles);
+
+        tmp.activate();
+        tmp.set_bonus(true);
+        tmp.set_position(lines[1]);
+
+        unsigned int r = rand() % bonus_count;
+        tmp.set_bonus_type(static_cast<enum bonus>(r));
+
+        std::string text_name("Bonus");
+
+        switch (r) {
+            case skip:
+                text_name += " Skip";
+                break;
+            case shield:
+                text_name += " Shield";
+                break;
+            default:
+                // case coin:
+                text_name += " Coin";
+                break;
+        }
+
+        tmp.set_texture(data->assets.get_texture(text_name));
+        tmp.set_texture_rect(sf::IntRect(0, 0, tile_size, tile_size));
     }
 }
 
@@ -196,40 +250,127 @@ void game_state::obstacles_update(float dt) {
     }
 
     for (obstacle& obstacle : _obstacles) {
-        if (!obstacle.active()) continue;
+        if (!obstacle.active()) {
+            obstacle.set_bonus(false);
+            continue;
+        }
 
         obstacle.move(sf::Vector2f(1, 0) * (object_speed * dt));
 
         if (obstacle.get_global_bounds().left + obstacle.get_global_bounds().width <
             data->window.getView().getCenter().x - data->window.getView().getSize().x / 2) {
             obstacle.disable();
+            obstacle.set_bonus(false);
+
             score += score_increase;
             score_text.setString("Score: " + std::to_string(score));
         }
     }
 }
 
-bool is_player_hit_obstacle(game_state& gs) {
+obstacle* player_hit_obstacle(game_state& gs) {
     sf::Sprite player_sprite = gs.player.get_sprite();
 
     for (obstacle& obstacle : gs._obstacles) {
         if (!obstacle.active()) continue;
 
-        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) return true;
+        if (player_sprite.getGlobalBounds().intersects(obstacle.get_global_bounds())) {
+            obstacle.disable();
+
+            return &obstacle;
+        }
     }
 
-    return false;
+    return NULL;
 }
 
 void game_state::update(float dt) {
+    constexpr float coin_bonus_show_time = 3.0;
+    constexpr float shield_bonus_time = 6.0;
+
     _walls->move(dt);
     obstacles_update(dt);
 
-    if (is_player_hit_obstacle(*this)) {
-        // Player hit an obstacle and died
+    for (sf::Sprite& sprite : bonus_sprites) {
+        sprite.setPosition(player.get_position().x - player.get_sprite().getGlobalBounds().width / 2,
+                           player.get_position().y - player.get_sprite().getGlobalBounds().height / 2);
+    }
 
-        max_score_save();
-        data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
+    obstacle* hit_obstacle = player_hit_obstacle(*this);
+
+    // Apply shield bonus
+    if (bonuses[skip]) {
+        // NULL means player does not hit any obstacles
+        hit_obstacle = NULL;
+
+        if (shield_bonus_time - shield_bonus_timer.get_elapsed_seconds() > shield_bonus_time / 4) {
+            /* Active state of shield bonus:
+             * max move speed
+             * skip all obstacles */
+
+            object_speed = object_speed_max * 2;
+        }
+        else if (shield_bonus_time - shield_bonus_timer.get_elapsed_seconds() > 0.01) {
+            /* Before-end state of shield bonus:
+             * restore old move speed
+             * skip all obstacles */
+
+            object_speed = shield_object_speed_before;
+        }
+        else {
+            // End shield bonus
+
+            shield_bonus_timer.pause();
+            bonuses[skip] = false;
+        }
+    }
+
+    bonus_text.setString("");
+
+    // Show coin bonus message
+    if (bonuses[coin] && coin_bonus_show_time - coin_bonus_timer.get_elapsed_seconds() > 0.01) {
+        bonus_text.setString("+ 20 Score");
+    } else if (bonuses[coin]) {
+        /* The message was shown for 3 seconds, so
+         * the bonus effect has ended */
+
+        coin_bonus_timer.pause();
+        bonuses[coin] = false;
+    }
+
+    if (hit_obstacle) {
+        // Player hit an obstacle
+
+        if (hit_obstacle->bonus()) {
+            // Player got bonus
+            enum bonus bt = hit_obstacle->get_bonus_type();
+
+            bonuses[bt] = true;
+
+            if (bt == coin) {
+                score += 20;
+                coin_bonus_timer.restart();
+            }
+            else if (bt == skip) {
+                shield_object_speed_before = object_speed;
+
+                shield_bonus_timer.restart();
+            }
+
+            hit_obstacle->set_bonus(false);
+            return;
+        }
+
+        if (bonuses[shield]) {
+            // Player had extra life bonus
+
+            bonuses[shield] = false;
+        } else {
+            // Player died
+
+            max_score_save();
+            data->machine.replace_state(state_ptr(new game_over_state(data, score, clock)));
+        }
     }
 }
 
@@ -243,6 +384,11 @@ void game_state::draw(float dt) {
 
     player.draw();
     data->window.draw(score_text);
+    data->window.draw(bonus_text);
+
+    for (int i = 1; i < bonus_count; i++) {
+        if (bonuses[i]) data->window.draw(bonus_sprites.at(i));
+    }
 
     data->window.display();
 }

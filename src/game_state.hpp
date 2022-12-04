@@ -16,6 +16,15 @@ class game_state : public state {
 
     player_ player;
 
+    bool bonuses[bonus_count];
+    sf::Text bonus_text;
+    std::deque<sf::Sprite> bonus_sprites;
+
+    timer coin_bonus_timer;
+
+    timer shield_bonus_timer;
+    float shield_object_speed_before;
+
     walls* _walls;
 
     sf::Vector2f lines[3];
@@ -43,7 +52,6 @@ class game_state : public state {
     sf::Text score_text;
     sf::Font score_font;
 
-   private:
     void obstacles_update(float dt);
     void objects_spawn();
     obstacle& get_free_obstacle(std::vector<obstacle>& arr);
@@ -51,7 +59,7 @@ class game_state : public state {
 
     void max_score_save();
 
-    friend bool is_player_hit_obstacle(game_state& gs);
+    friend obstacle* player_hit_obstacle(game_state& gs);
 
    public:
     game_state(game_data_ptr _data);
