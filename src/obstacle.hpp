@@ -7,7 +7,7 @@
 
 namespace yapg {
 constexpr int bonus_count = 3;
-enum bonus { coin = 0, skip, shield };
+enum bonus { coin = 0, shield, skip };
 
 class obstacle {
    public:

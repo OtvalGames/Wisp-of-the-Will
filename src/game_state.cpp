@@ -41,11 +41,11 @@ void game_state::init() {
     }
 
     bonus_sprites.at(coin).setTexture(data->assets.get_texture("Bonus Coin"));
-    bonus_sprites.at(skip).setTexture(data->assets.get_texture("Bonus Skip"));
     bonus_sprites.at(shield).setTexture(data->assets.get_texture("Bonus Shield"));
+    bonus_sprites.at(skip).setTexture(data->assets.get_texture("Bonus Skip"));
 
-    bonus_sprites.at(skip).setColor(sf::Color(144, 114, 171, 255 / 1.5));
     bonus_sprites.at(shield).setColor(sf::Color(196, 208, 233, 255 / 1.5));
+    bonus_sprites.at(skip).setColor(sf::Color(144, 114, 171, 255 / 1.5));
 
     // All bonuses is disabled by default
     for (int i = 0; i < bonus_count; i++) bonuses[i] = false;
