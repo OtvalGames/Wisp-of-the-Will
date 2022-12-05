@@ -135,7 +135,7 @@ void main_menu_state::init() {
 
         music_settings >> music_status;
 
-        if (music_status.compare("on")) {
+        if (!music_status.compare("on")) {
             music.setLoop(true);
             music.setVolume(default_volume);
 

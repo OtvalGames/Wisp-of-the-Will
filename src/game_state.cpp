@@ -100,11 +100,11 @@ void game_state::init() {
 
         music_settings >> music_status;
 
-        if (music_status.compare("on")) {
+        if (!music_status.compare("on")) {
             music.setLoop(true);
             music.setVolume(default_volume);
 
-            if (music.openFromFile(OST_HM_DUST_FILEPATH)) music.play();
+            if (music.openFromFile(OST_HM_HYDROGEN_FILEPATH)) music.play();
         }
 
         music_settings.close();
