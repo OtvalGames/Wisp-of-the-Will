@@ -37,6 +37,14 @@ unsigned int get_score_from_save() {
         file >> score;
 
         if (score < 0) score = 0;
+
+        file.close();
+    } else {
+        std::ofstream file(MAX_SCORE_FILEPATH);
+
+        file << score;
+
+        file.close();
     }
 
     return score;
