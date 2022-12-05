@@ -35,5 +35,8 @@
 obj/*
 bin/*
 
+# Saves
+res/save/*
+
 # Qt Creator files
 CMakeLists.txt.user*
