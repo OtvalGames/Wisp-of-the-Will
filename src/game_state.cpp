@@ -361,6 +361,7 @@ void game_state::update(float dt) {
              * skip all obstacles */
 
             object_speed = shield_object_speed_before;
+            _walls->set_move_speed(shield_object_speed_before);
         } else {
             // End shield bonus
 
