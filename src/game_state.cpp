@@ -8,7 +8,7 @@
 
 namespace yapg {
 constexpr int tile_size = 64;
-constexpr float object_speed_max = -900.0;
+constexpr float object_speed_max = -1100.0;
 
 game_state::game_state(game_data_ptr _data)
     : data(_data),
