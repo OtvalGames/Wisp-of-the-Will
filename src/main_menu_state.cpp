@@ -149,6 +149,11 @@ void main_menu_state::init() {
 
         music_settings << "on";
 
+        music.setLoop(true);
+        music.setVolume(default_volume);
+
+        if (music.openFromFile(OST_HM_DUST_FILEPATH)) music.play();
+
         music_settings.close();
     }
 }
