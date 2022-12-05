@@ -17,7 +17,7 @@
 #define GAMEOVER_BG_FILEPATH MENU_BG_FILEPATH
 
 // Buttons
-#define GO_BUTTON_FILEPATH "res/images/button_go.png"
+#define RESUME_BUTTON_FILEPATH "res/images/button_resume.png"
 #define PLAY_BUTTON_FILEPATH "res/images/button_play.png"
 #define AGAIN_BUTTON_FILEPATH "res/images/button_again.png"
 #define EXIT_BUTTON_FILEPATH "res/images/button_exit.png"
