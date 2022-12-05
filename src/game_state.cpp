@@ -1,5 +1,7 @@
 #include "game_state.hpp"
 
+#include <fstream>
+
 #include "game_over_state.hpp"
 #include "pause_state.hpp"
 #include "resources.hpp"
@@ -91,10 +93,29 @@ void game_state::init() {
     // Soundtrack
     constexpr float default_volume = 25;
 
-    music.setLoop(true);
-    music.setVolume(default_volume);
+    std::ifstream music_settings(MUSIC_SETTINGS_FILEPATH);
 
-    if (music.openFromFile(OST_HM_HYDROGEN_FILEPATH)) music.play();
+    if (music_settings.is_open()) {
+        std::string music_status;
+
+        music_settings >> music_status;
+
+        if (music_status.compare("on")) {
+            music.setLoop(true);
+            music.setVolume(default_volume);
+
+            if (music.openFromFile(OST_HM_DUST_FILEPATH)) music.play();
+        }
+
+        music_settings.close();
+
+    } else {
+        std::ofstream music_settings(MUSIC_SETTINGS_FILEPATH);
+
+        music_settings << "on";
+
+        music_settings.close();
+    }
 }
 
 void game_state::handle_input() {

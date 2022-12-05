@@ -128,10 +128,29 @@ void main_menu_state::init() {
     // Soundtrack
     constexpr float default_volume = 25;
 
-    music.setLoop(true);
-    music.setVolume(default_volume);
+    std::ifstream music_settings(MUSIC_SETTINGS_FILEPATH);
 
-    if (music.openFromFile(OST_HM_DUST_FILEPATH)) music.play();
+    if (music_settings.is_open()) {
+        std::string music_status;
+
+        music_settings >> music_status;
+
+        if (music_status.compare("on")) {
+            music.setLoop(true);
+            music.setVolume(default_volume);
+
+            if (music.openFromFile(OST_HM_DUST_FILEPATH)) music.play();
+        }
+
+        music_settings.close();
+
+    } else {
+        std::ofstream music_settings(MUSIC_SETTINGS_FILEPATH);
+
+        music_settings << "on";
+
+        music_settings.close();
+    }
 }
 
 void main_menu_state::handle_input() {
