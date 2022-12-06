@@ -7,10 +7,10 @@ game::game() {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
 
-    // Final: data->window.create(sf::VideoMode().getFullscreenModes().at(0), "YAPG",
-    // sf::Style::Fullscreen, settings);
-    data->window.create(sf::VideoMode().getFullscreenModes().at(2), "Wisp of the Will", sf::Style::Default,
-                        settings);
+    data->window.create(sf::VideoMode().getFullscreenModes().at(0), "YAPG",
+    sf::Style::Fullscreen, settings);
+    // data->window.create(sf::VideoMode().getFullscreenModes().at(2), "Wisp of the Will", sf::Style::Default,
+                        // settings);
     data->window.setFramerateLimit(framerate);
     data->window.setPosition(sf::Vector2i(0, 0));
     data->window.setKeyRepeatEnabled(false);
