@@ -3,7 +3,7 @@
 #include "main_menu_state.hpp"
 #include "resources.hpp"
 
-namespace yapg {
+namespace wotw {
 splash_state::splash_state(game_data_ptr _data) : data(_data) {}
 
 void splash_state::init() {
@@ -61,4 +61,4 @@ void splash_state::draw(float dt) {
 }
 
 void splash_state::close() {}
-}  // namespace yapg
+}  // namespace wotw

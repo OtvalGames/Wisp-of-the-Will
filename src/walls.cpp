@@ -2,7 +2,7 @@
 
 #include "resources.hpp"
 
-namespace yapg {
+namespace wotw {
 walls::walls(game_data_ptr _data) : data(_data), move_speed(-200.0f) {
     data->assets.load_texture("Walls", WALLS_FILEPATH);
 
@@ -44,4 +44,4 @@ void walls::set_move_speed(float _speed) { move_speed = _speed; }
 
 int walls::get_move_speed() { return move_speed; }
 
-}  // namespace yapg
+}  // namespace wotw

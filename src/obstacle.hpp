@@ -5,7 +5,7 @@
 
 #include "game.hpp"
 
-namespace yapg {
+namespace wotw {
 constexpr int bonus_count = 3;
 enum bonus { coin = 0, shield, skip };
 
@@ -46,6 +46,6 @@ class obstacle {
     bool is_bonus;
     enum bonus bonus_type;
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif

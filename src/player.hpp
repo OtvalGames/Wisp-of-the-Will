@@ -3,7 +3,7 @@
 
 #include "game.hpp"
 
-namespace yapg {
+namespace wotw {
 class player_ {
    public:
     player_(game_data_ptr _data);
@@ -28,6 +28,6 @@ class player_ {
     std::deque<sf::Texture> animations;
     unsigned int animation_iterator;
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif

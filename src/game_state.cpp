@@ -6,7 +6,7 @@
 #include "pause_state.hpp"
 #include "resources.hpp"
 
-namespace yapg {
+namespace wotw {
 constexpr int tile_size = 64;
 constexpr float object_speed_max = -1100.0;
 
@@ -438,4 +438,4 @@ void game_state::draw(float dt) {
 }
 
 void game_state::close() { music.stop(); }
-}  // namespace yapg
+}  // namespace wotw

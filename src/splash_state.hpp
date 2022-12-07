@@ -4,7 +4,7 @@
 #include "game.hpp"
 #include "state.hpp"
 
-namespace yapg {
+namespace wotw {
 class splash_state : public state {
    private:
     game_data_ptr data;
@@ -22,6 +22,6 @@ class splash_state : public state {
     void draw(float dt);
     void close();
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif  // SPLASH_STATE_HPP

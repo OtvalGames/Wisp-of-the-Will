@@ -1,7 +1,7 @@
 #include "game.hpp"
 
 int main() {
-    yapg::game();
+    wotw::game();
 
     return 0;
 }

@@ -4,7 +4,7 @@
 
 #include "resources.hpp"
 
-namespace yapg {
+namespace wotw {
 
 player_::player_(game_data_ptr _data) : data(_data), animation_iterator(0) { init(); }
 
@@ -66,4 +66,4 @@ sf::Vector2f player_::get_position() { return sprite.getPosition(); }
 
 sf::Sprite& player_::get_sprite() { return sprite; }
 
-}  // namespace yapg
+}  // namespace wotw

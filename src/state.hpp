@@ -1,7 +1,7 @@
 #ifndef STATE_HPP
 #define STATE_HPP
 
-namespace yapg {
+namespace wotw {
 class state {
    public:
     virtual void init() = 0;
@@ -11,6 +11,6 @@ class state {
     virtual void draw(float dt) = 0;
     virtual void close() = 0;
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif

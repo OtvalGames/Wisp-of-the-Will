@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <map>
 
-namespace yapg {
+namespace wotw {
 class asset_manager {
    public:
     void load_texture(std::string _name, std::string _file_name);
@@ -14,6 +14,6 @@ class asset_manager {
    private:
     std::map<std::string, sf::Texture> textures;
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif
