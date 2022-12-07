@@ -22,9 +22,14 @@ void splash_state::handle_input() {
     typedef sf::Keyboard kb;
 
     while (data->window.pollEvent(e)) {
-        if (e.type == sf::Event::Closed) data->window.close();
-        if (kb::isKeyPressed(kb::Enter) || kb::isKeyPressed(kb::Escape) || kb::isKeyPressed(kb::Space))
+        if (e.type == sf::Event::Closed)
+            data->window.close();
+        else if (e.type == sf::Event::KeyPressed && e.key.code == kb::Enter ||
+                 e.key.code == kb::Escape || e.key.code == kb::Space) {
+            // Skip splash screen
+
             data->machine.replace_state(state_ptr(new main_menu_state(data)));
+        }
     }
 }
 
