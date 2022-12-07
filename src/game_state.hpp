@@ -10,7 +10,7 @@
 #include "timer.hpp"
 #include "walls.hpp"
 
-namespace yapg {
+namespace wotw {
 class game_state : public state {
    private:
     game_data_ptr data;
@@ -67,6 +67,6 @@ class game_state : public state {
     void draw(float dt);
     void close();
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif  // GAME_STATE_HPP

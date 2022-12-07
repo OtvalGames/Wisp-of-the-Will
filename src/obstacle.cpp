@@ -1,6 +1,6 @@
 #include "obstacle.hpp"
 
-namespace yapg {
+namespace wotw {
 obstacle::obstacle(game_data_ptr _data)
     : data(_data), is_active(false), is_bonus(false), bonus_type(coin) {}
 
@@ -34,4 +34,4 @@ enum bonus obstacle::get_bonus_type() { return bonus_type; }
 
 bool obstacle::active() { return is_active; }
 
-}  // namespace yapg
+}  // namespace wotw

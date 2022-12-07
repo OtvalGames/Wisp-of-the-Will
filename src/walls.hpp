@@ -6,7 +6,7 @@
 
 #include "game.hpp"
 
-namespace yapg {
+namespace wotw {
 class walls {
    public:
     walls(game_data_ptr _data);
@@ -24,6 +24,6 @@ class walls {
 
     float move_speed;
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif

@@ -5,7 +5,7 @@
 #include "state.hpp"
 #include "timer.hpp"
 
-namespace yapg {
+namespace wotw {
 constexpr int pause_buttons_count = 2;
 
 class pause_state : public state {
@@ -32,6 +32,6 @@ class pause_state : public state {
     void draw(float dt);
     void close();
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif  // PAUSE_STATE_HPP

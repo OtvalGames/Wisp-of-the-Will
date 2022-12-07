@@ -5,7 +5,7 @@
 #include "game_state.hpp"
 #include "resources.hpp"
 
-namespace yapg {
+namespace wotw {
 main_menu_state::main_menu_state(game_data_ptr _data) : data(_data) {}
 
 void main_menu_state::init() {
@@ -224,4 +224,4 @@ void main_menu_state::draw(float dt) {
 }
 
 void main_menu_state::close() { music.stop(); }
-}  // namespace yapg
+}  // namespace wotw

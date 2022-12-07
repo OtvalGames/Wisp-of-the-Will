@@ -1,31 +1,55 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(yapg LANGUAGES CXX)
+project(wotw LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(yapg)
+add_executable(wotw)
 
-# Very bad practice
-file(GLOB _HEADER_FILES_ CONFIGURE_DEPENDS "src/*.h" "src/*.hpp")
-file(GLOB _SOURCE_FILES_ CONFIGURE_DEPENDS "src/*.c" "src/*.cpp")
+target_sources(wotw PRIVATE
+    # Headers
+    src/timer.hpp
+    src/state.hpp
 
-target_sources(yapg PRIVATE ${_HEADER_FILES_} ${_SOURCE_FILES_})
+    src/asset_manager.hpp
+    src/game.hpp
+    src/game_over_state.hpp
+    src/game_state.hpp
+    src/main_menu_state.hpp
+    src/obstacle.hpp
+    src/pause_state.hpp
+    src/player.hpp
+    src/resources.hpp
+    src/splash_state.hpp
+    src/state_machine.hpp
+    src/walls.hpp
 
-add_custom_command(
-  TARGET yapg
+    # Sources
+    src/main.cpp
+
+    src/asset_manager.cpp
+    src/game.cpp
+    src/game_over_state.cpp
+    src/game_state.cpp
+    src/main_menu_state.cpp
+    src/obstacle.cpp
+    src/pause_state.cpp
+    src/player.cpp
+    src/resources.cpp
+    src/splash_state.cpp
+    src/state_machine.cpp
+    src/walls.cpp
+)
+
+add_custom_command(TARGET wotw
   POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_SOURCE_DIR}/res
-          $<TARGET_FILE_DIR:yapg>/res)
+          $<TARGET_FILE_DIR:wotw>/res)
 
-find_package(
-  SFML
-  COMPONENTS graphics window system
-  REQUIRED)
-include_directories(${SFML_INCLUDE_DIR})
-target_link_libraries(yapg sfml-graphics sfml-window sfml-system sfml-audio)
+find_package(SFML COMPONENTS graphics window system audio REQUIRED)
+target_link_libraries(wotw sfml-graphics sfml-window sfml-system sfml-audio)
 
-set_target_properties(yapg PROPERTIES LINK_FLAGS_RELEASE -s)
+set_target_properties(wotw PROPERTIES LINK_FLAGS_RELEASE -s)
 
-install(TARGETS yapg LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS wotw LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})

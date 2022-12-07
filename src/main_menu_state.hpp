@@ -7,7 +7,7 @@
 #include "game.hpp"
 #include "state.hpp"
 
-namespace yapg {
+namespace wotw {
 constexpr int menu_buttons_count = 2;
 
 class main_menu_state : public state {
@@ -48,6 +48,6 @@ class main_menu_state : public state {
     void draw(float dt);
     void close();
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif  // MAIN_MENU_STATE_HPP

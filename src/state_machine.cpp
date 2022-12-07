@@ -1,6 +1,6 @@
 #include "state_machine.hpp"
 
-namespace yapg {
+namespace wotw {
 void state_machine::add_state(state_ptr _state) {
     is_adding = true;
 
@@ -52,4 +52,4 @@ void state_machine::state_change_process() {
 }
 
 state_ptr& state_machine::get_active_state() { return states.top(); }
-}  // namespace yapg
+}  // namespace wotw

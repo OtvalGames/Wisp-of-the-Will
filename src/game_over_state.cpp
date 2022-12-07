@@ -4,7 +4,7 @@
 #include "main_menu_state.hpp"
 #include "resources.hpp"
 
-namespace yapg {
+namespace wotw {
 game_over_state::game_over_state(game_data_ptr _data, unsigned int _game_score, timer _game_timer)
     : data(_data), game_score(_game_score), game_timer(_game_timer), is_exit(false) {}
 
@@ -131,4 +131,4 @@ void game_over_state::draw(float dt) {
 }
 
 void game_over_state::close() {}
-}  // namespace yapg
+}  // namespace wotw

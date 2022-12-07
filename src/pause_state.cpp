@@ -3,7 +3,7 @@
 #include "main_menu_state.hpp"
 #include "resources.hpp"
 
-namespace yapg {
+namespace wotw {
 pause_state::pause_state(game_data_ptr _data, timer* _game_timer)
     : data(_data), game_timer_ptr(_game_timer), is_exit(false) {
     game_timer_ptr->pause();
@@ -120,4 +120,4 @@ void pause_state::draw(float dt) {
 }
 
 void pause_state::close() {}
-}  // namespace yapg
+}  // namespace wotw

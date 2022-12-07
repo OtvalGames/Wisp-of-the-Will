@@ -3,7 +3,7 @@
 
 #include <SFML/System/Clock.hpp>
 
-namespace yapg {
+namespace wotw {
 class timer {
    private:
     sf::Clock sf_timer;
@@ -41,6 +41,6 @@ class timer {
         return run_time;
     }
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif  // TIMER_HPP

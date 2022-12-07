@@ -2,7 +2,7 @@
 
 #include "splash_state.hpp"
 
-namespace yapg {
+namespace wotw {
 game::game() {
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
@@ -53,4 +53,4 @@ void game::run() {
         data->machine.get_active_state()->draw(accumulator / dt);
     }
 }
-}  // namespace yapg
+}  // namespace wotw

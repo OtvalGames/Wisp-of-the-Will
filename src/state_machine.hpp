@@ -6,7 +6,7 @@
 
 #include "state.hpp"
 
-namespace yapg {
+namespace wotw {
 typedef std::unique_ptr<state> state_ptr;
 
 class state_machine {
@@ -31,6 +31,6 @@ class state_machine {
     bool is_removing;
     bool is_clear;
 };
-}  // namespace yapg
+}  // namespace wotw
 
 #endif
