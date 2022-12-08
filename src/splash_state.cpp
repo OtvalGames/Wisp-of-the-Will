@@ -62,5 +62,5 @@ void splash_state::draw(float dt) {
     data->window.display();
 }
 
-void splash_state::close() {}
+splash_state::~splash_state() {}
 }  // namespace wotw

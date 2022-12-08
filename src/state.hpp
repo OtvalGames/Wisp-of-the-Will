@@ -9,7 +9,8 @@ class state {
     virtual void handle_input() = 0;
     virtual void update(float dt) = 0;
     virtual void draw(float dt) = 0;
-    virtual void close() = 0;
+
+    virtual ~state() = default;
 };
 }  // namespace wotw
 

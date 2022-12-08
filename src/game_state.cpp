@@ -437,5 +437,5 @@ void game_state::draw(float dt) {
     data->window.display();
 }
 
-void game_state::close() { music.stop(); }
+game_state::~game_state() { music.stop(); }
 }  // namespace wotw

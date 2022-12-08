@@ -46,7 +46,8 @@ class main_menu_state : public state {
     void handle_input();
     void update(float dt);
     void draw(float dt);
-    void close();
+
+    ~main_menu_state();
 };
 }  // namespace wotw
 

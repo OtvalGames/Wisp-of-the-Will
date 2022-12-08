@@ -119,5 +119,5 @@ void pause_state::draw(float dt) {
     data->window.display();
 }
 
-void pause_state::close() {}
+pause_state::~pause_state() {}
 }  // namespace wotw

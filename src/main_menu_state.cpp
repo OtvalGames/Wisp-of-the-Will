@@ -223,5 +223,5 @@ void main_menu_state::draw(float dt) {
     data->window.display();
 }
 
-void main_menu_state::close() { music.stop(); }
+main_menu_state::~main_menu_state() { music.stop(); }
 }  // namespace wotw

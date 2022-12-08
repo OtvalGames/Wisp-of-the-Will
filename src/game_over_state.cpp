@@ -130,5 +130,5 @@ void game_over_state::draw(float dt) {
     data->window.display();
 }
 
-void game_over_state::close() {}
+game_over_state::~game_over_state() {}
 }  // namespace wotw
