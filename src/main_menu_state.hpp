@@ -41,8 +41,6 @@ class main_menu_state : public state {
    public:
     main_menu_state(game_data_ptr _data);
 
-    void init();
-
     void handle_input();
     void update(float dt);
     void draw(float dt);

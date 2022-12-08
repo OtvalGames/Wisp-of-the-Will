@@ -4,9 +4,7 @@
 #include "resources.hpp"
 
 namespace wotw {
-splash_state::splash_state(game_data_ptr _data) : data(_data) {}
-
-void splash_state::init() {
+splash_state::splash_state(game_data_ptr _data) : data(_data) {
     data->assets.load_texture("Splash Background", SPLASH_BG_FILEPATH);
 
     bg.setTexture(data->assets.get_texture("Splash Background"));

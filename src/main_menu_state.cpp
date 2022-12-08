@@ -6,9 +6,7 @@
 #include "resources.hpp"
 
 namespace wotw {
-main_menu_state::main_menu_state(game_data_ptr _data) : data(_data) {}
-
-void main_menu_state::init() {
+main_menu_state::main_menu_state(game_data_ptr _data) : data(_data) {
     data->window.setView(data->window.getDefaultView());
 
     // BG

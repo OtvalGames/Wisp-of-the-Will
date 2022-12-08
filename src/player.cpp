@@ -5,10 +5,7 @@
 #include "resources.hpp"
 
 namespace wotw {
-
-player_::player_(game_data_ptr _data) : data(_data), animation_iterator(0) { init(); }
-
-void player_::init() {
+player_::player_(game_data_ptr _data) : data(_data), animation_iterator(0) {
     std::string animations_filepath = PLAYER_ANIM_CLASSIC_FILEPATH;
 
     std::ifstream current_skin_file(CURRENT_SKIN_FILEPATH);

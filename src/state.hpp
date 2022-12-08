@@ -4,7 +4,7 @@
 namespace wotw {
 class state {
    public:
-    virtual void init() = 0;
+    state() = default;
 
     virtual void handle_input() = 0;
     virtual void update(float dt) = 0;

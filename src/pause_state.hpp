@@ -25,8 +25,6 @@ class pause_state : public state {
    public:
     pause_state(game_data_ptr _data, timer* _game_timer);
 
-    void init();
-
     void handle_input();
     void update(float dt);
     void draw(float dt);

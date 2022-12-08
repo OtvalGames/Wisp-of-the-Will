@@ -6,9 +6,7 @@
 
 namespace wotw {
 game_over_state::game_over_state(game_data_ptr _data, unsigned int _game_score, timer _game_timer)
-    : data(_data), game_score(_game_score), game_timer(_game_timer), is_exit(false) {}
-
-void game_over_state::init() {
+    : data(_data), game_score(_game_score), game_timer(_game_timer), is_exit(false) {
     // BG
     data->assets.load_texture("Game Over Background", GAMEOVER_BG_FILEPATH);
     bg.setTexture(data->assets.get_texture("Game Over Background"));

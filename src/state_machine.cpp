@@ -34,14 +34,12 @@ void state_machine::state_change_process() {
 
     if (is_adding) {
         states.push(std::move(new_state));
-        states.top()->init();
 
         is_adding = false;
     } else if (is_replacing) {
         if (!states.empty()) {
             states.pop();
             states.push(std::move(new_state));
-            states.top()->init();
         }
 
         is_replacing = false;
