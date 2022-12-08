@@ -16,6 +16,8 @@ splash_state::splash_state(game_data_ptr _data) : data(_data) {
     clock.restart();
 }
 
+splash_state::splash_state() { throw std::runtime_error("No data struct is allocated!\n"); }
+
 void splash_state::handle_input() {
     sf::Event e;
 
