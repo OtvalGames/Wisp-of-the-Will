@@ -55,8 +55,6 @@ void player_::draw() {
     data->window.draw(sprite);
 }
 
-void player_::handle_input(sf::Event event) {}
-
 void player_::set_position(sf::Vector2f point) { sprite.setPosition(point); }
 
 sf::Vector2f player_::get_position() { return sprite.getPosition(); }

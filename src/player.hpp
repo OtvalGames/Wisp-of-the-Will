@@ -9,9 +9,6 @@ class player_ {
     player_(game_data_ptr _data);
 
     void draw();
-    void handle_input(sf::Event event);
-    void update(float dt);
-
     void animate();
 
     void set_position(sf::Vector2f point);
