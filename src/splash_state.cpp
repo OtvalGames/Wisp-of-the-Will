@@ -14,6 +14,8 @@ void splash_state::init() {
     fit_sprite_size(bg, sf::Vector2f(data->window.getSize()));
 
     dim.setSize(sf::Vector2f(data->window.getSize()));
+
+    clock.restart();
 }
 
 void splash_state::handle_input() {
