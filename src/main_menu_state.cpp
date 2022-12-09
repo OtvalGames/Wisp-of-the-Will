@@ -6,9 +6,7 @@
 #include "resources.hpp"
 
 namespace wotw {
-main_menu_state::main_menu_state(game_data_ptr _data) : data(_data) {}
-
-void main_menu_state::init() {
+main_menu_state::main_menu_state(game_data_ptr _data) : data(_data) {
     data->window.setView(data->window.getDefaultView());
 
     // BG
@@ -223,5 +221,5 @@ void main_menu_state::draw(float dt) {
     data->window.display();
 }
 
-void main_menu_state::close() { music.stop(); }
+main_menu_state::~main_menu_state() { music.stop(); }
 }  // namespace wotw

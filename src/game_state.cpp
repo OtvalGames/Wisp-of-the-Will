@@ -18,9 +18,7 @@ game_state::game_state(game_data_ptr _data)
       last_object_spawn_time(0.0f),
       object_speed(-200.0f),
       last_object_speed_increase_time(0.0f),
-      score(0) {}
-
-void game_state::init() {
+      score(0) {
     srand(time(NULL));
 
     data->assets.load_texture("Obstacles", OBSTACLES_FILEPATH);
@@ -437,5 +435,5 @@ void game_state::draw(float dt) {
     data->window.display();
 }
 
-void game_state::close() { music.stop(); }
+game_state::~game_state() { music.stop(); }
 }  // namespace wotw

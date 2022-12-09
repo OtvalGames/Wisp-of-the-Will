@@ -14,13 +14,13 @@ class splash_state : public state {
 
    public:
     splash_state(game_data_ptr _data);
-
-    void init();
+    splash_state();
 
     void handle_input();
     void update(float dt);
     void draw(float dt);
-    void close();
+
+    ~splash_state();
 };
 }  // namespace wotw
 

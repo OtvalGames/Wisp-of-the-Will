@@ -4,9 +4,7 @@
 #include "resources.hpp"
 
 namespace wotw {
-splash_state::splash_state(game_data_ptr _data) : data(_data) {}
-
-void splash_state::init() {
+splash_state::splash_state(game_data_ptr _data) : data(_data) {
     data->assets.load_texture("Splash Background", SPLASH_BG_FILEPATH);
 
     bg.setTexture(data->assets.get_texture("Splash Background"));
@@ -17,6 +15,8 @@ void splash_state::init() {
 
     clock.restart();
 }
+
+splash_state::splash_state() { throw std::runtime_error("No data struct is allocated!\n"); }
 
 void splash_state::handle_input() {
     sf::Event e;
@@ -62,5 +62,5 @@ void splash_state::draw(float dt) {
     data->window.display();
 }
 
-void splash_state::close() {}
+splash_state::~splash_state() {}
 }  // namespace wotw

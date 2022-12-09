@@ -7,9 +7,7 @@ namespace wotw {
 pause_state::pause_state(game_data_ptr _data, timer* _game_timer)
     : data(_data), game_timer_ptr(_game_timer), is_exit(false) {
     game_timer_ptr->pause();
-}
 
-void pause_state::init() {
     // BG
     data->assets.load_texture("Pause Background", PAUSE_BG_FILEPATH);
     bg.setTexture(data->assets.get_texture("Pause Background"));
@@ -119,5 +117,5 @@ void pause_state::draw(float dt) {
     data->window.display();
 }
 
-void pause_state::close() {}
+pause_state::~pause_state() {}
 }  // namespace wotw

@@ -60,12 +60,11 @@ class game_state : public state {
    public:
     game_state(game_data_ptr _data);
 
-    void init();
-
     void handle_input();
     void update(float dt);
     void draw(float dt);
-    void close();
+
+    ~game_state();
 };
 }  // namespace wotw
 

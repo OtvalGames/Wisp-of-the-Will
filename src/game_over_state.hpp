@@ -30,12 +30,11 @@ class game_over_state : public state {
    public:
     game_over_state(game_data_ptr _data, unsigned int _game_score, timer _game_timer);
 
-    void init();
-
     void handle_input();
     void update(float dt);
     void draw(float dt);
-    void close();
+
+    ~game_over_state();
 };
 }  // namespace wotw
 
