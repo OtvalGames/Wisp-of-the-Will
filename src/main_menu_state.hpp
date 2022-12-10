@@ -17,8 +17,6 @@ class main_menu_state : public state {
     enum arrows { left = 0, right };
 
     game_data_ptr data;
-    sf::Clock clock;
-
     sf::Sprite bg;
     std::deque<sf::Sprite*> buttons;
 
